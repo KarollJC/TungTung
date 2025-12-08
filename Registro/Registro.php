@@ -71,7 +71,7 @@
                 <br><br>
                 <p class="text-center">¿Ya tienes una cuenta?</p>
                 <p class="text-center">
-                    <a href="#" class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
+                    <a href="C:\Users\CC2_PC05\TungTung\Login\login.php" class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
                         Iniciar sesión
                     </a>
                 </p>
