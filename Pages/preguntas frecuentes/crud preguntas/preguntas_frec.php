@@ -1,46 +1,109 @@
 <?php include("db.php"); ?>
+
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>CRUD preguntas_frec</title>
+    <meta charset="UTF-8">
+    <title>Preguntas Frecuentes</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body{
+            background: linear-gradient(135deg, #000000, #3a0505);
+        }
+        .faq-card{
+            background-color:#330000;
+            color:white;
+            border:none;
+        }
+        .accordion-button{
+            background-color:#330000;
+            color:white;
+        }
+        .accordion-button:not(.collapsed){
+            background-color:#4d0000;
+            color:white;
+        }
+        .btn-editar{
+            background-color:#555;
+            color:white;
+        }
+        .btn-editar:hover{
+            background-color:#777;
+            color:white;
+        }
+        .btn-eliminar{
+            background-color:#990000;
+            color:white;
+        }
+        .btn-eliminar:hover{
+            background-color:#cc0000;
+            color:white;
+        }
+        .btn-add{
+            background-color:#990000;
+            color:white;
+        }
+        .btn-add:hover{
+            background-color:#cc0000;
+            color:white;
+        }
+        a{
+            text-decoration:none;
+        }
+    </style>
 </head>
-<body>
 
-<h1>preguntas frecuentes</h1>
+<body class="p-4">
 
-<a href="create.php">Agregar pregunta</a>
-<br><br>
+<div class="container mt-3">
 
-<table border="1" cellpadding="8">
-    <tr>
-        <th>id</th>
-        <th>pregunta</th>
-        <th>respuesta</th>
-        <th>categoria</th>
-        <th>orden</th>
-        <th>acciones</th>
-    </tr>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="text-white">Preguntas Frecuentes</h1>
+        <a href="create.php" class="btn btn-add">Agregar pregunta</a>
+    </div>
 
-    <?php
-    $resultado = $conexion->query("SELECT * FROM preguntas_frecuentes");
+    <div class="accordion" id="faqLista">
 
-    while ($fila = $resultado->fetch_assoc()) {
-        echo "<tr>";
-        echo "<td>{$fila['id_pregunta']}</td>";
-        echo "<td>{$fila['pregunta']}</td>";
-        echo "<td>{$fila['respuesta']}</td>";
-        echo "<td>{$fila['categoria']}</td>";
-        echo "<td>{$fila['orden']}</td>";
+        <?php
+        $sql = "SELECT * FROM preguntas_frecuentes ORDER BY orden ASC";
+        $resultado = $conexion->query($sql);
 
-        echo "<td>
-                <a href='update.php?id={$fila['id_pregunta']}'>contestar o editar</a>
-                <a href='delete.php?id={$fila['id_pregunta']}'>Eliminar</a>
-              </td>";
-        echo "</tr>";
-    }
-    ?>
+        while ($fila = $resultado->fetch_assoc()) {
+            $id = $fila['id_pregunta'];
+            $pregunta = $fila['pregunta'];
+            $respuesta = $fila['respuesta'];
 
-</table>
+            echo '
+            <div class="accordion-item faq-card mb-2">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#item'.$id.'">
+                        '.$pregunta.'
+                    </button>
+                </h2>
+                <div id="item'.$id.'" class="accordion-collapse collapse">
+                    <div class="accordion-body">
+                        '.$respuesta.'
+
+                        <div class="mt-3 d-flex gap-2">
+                            <a href="update.php?id='.$id.'" class="btn btn-editar btn-sm">Editar / Responder</a>
+                            <a href="delete.php?id='.$id.'" class="btn btn-eliminar btn-sm">Eliminar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            ';
+        }
+        ?>
+
+    </div>
+    <!--este apartado se esperara cuando se tenga la parte de la pagina principal para conectarla-->
+    <a href="../index.php" class="d-block mt-4 text-white">Regresar</a>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
