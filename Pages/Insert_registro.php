@@ -15,7 +15,7 @@
     $contra = $_POST['contra'];
     $telefono = $_POST['telefono'];
     
-    $consulta = "INSERT INTO usuarios (email, usuario, nombre, apellidos, f_nacimiento, contra, telefono)
+    $consulta = "INSERT INTO usuarios (email, usuario, nombre, apellidos, f_nacimiento, contra, num_telefono)
     VALUES ('$email', '$user', '$nombre', '$apellidos', '$fecha', '$contra', '$telefono')";
 
 

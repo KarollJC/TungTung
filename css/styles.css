@@ -1,0 +1,24 @@
+.login{
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    width: 300px;
+}
+.login h2 {
+    margin-bottom: 1.5rem;
+    color: #333;
+    text-align: center;
+    font-family: monospace, Helvetica, sans-serif;
+}
+button{
+    width: 100%;
+    padding: 10px;
+    margin-top: 1rem;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+}
