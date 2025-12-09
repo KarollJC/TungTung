@@ -1,55 +1,89 @@
-<?php include("db.php"); ?>
-
-<?php
+<?php 
+include("db.php");
 $id = $_GET['id'];
-
-$resultado = $conexion->query("SELECT * FROM preguntas_frecuentes WHERE id_pregunta = $id");
-$pregunta = $resultado->fetch_assoc();
+$q = $conexion->query("SELECT * FROM preguntas_frecuentes WHERE id_pregunta=$id");
+$preg = $q->fetch_assoc();
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Editar pregunta</title>
+    <meta charset="UTF-8">
+    <title>Editar Pregunta</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body{
+            background: linear-gradient(135deg, #000000, #3a0505);
+        }
+        .card-form{
+            background-color:#330000;
+            color:white;
+            border:none;
+            padding:25px;
+            border-radius:10px;
+        }
+        .btn-guardar{
+            background-color:#990000;
+            color:white;
+        }
+        .btn-guardar:hover{
+            background-color:#cc0000;
+            color:white;
+        }
+        .btn-volver{
+            background-color:#555;
+            color:white;
+        }
+        .btn-volver:hover{
+            background-color:#777;
+            color:white;
+        }
+    </style>
 </head>
-<body>
 
-<h1>Editar / Responder Pregunta</h1>
+<body class="p-4">
 
-<form method="POST">
+<div class="container mt-4">
+    <div class="card card-form mx-auto" style="max-width:600px;">
+        <h2 class="text-center mb-3">Editar / Responder Pregunta</h2>
 
-    Pregunta: <br>
-    <input type="text" name="pregunta" value="<?php echo $pregunta['pregunta']; ?>" required><br><br>
+        <form method="POST">
+            <label>Pregunta:</label>
+            <input type="text" name="pregunta" class="form-control mb-3" value="<?php echo $preg['pregunta']; ?>" required>
 
-    Respuesta: <br>
-    <textarea name="respuesta" rows="4" cols="40"><?php echo $pregunta['respuesta']; ?></textarea><br><br>
+            <label>Respuesta:</label>
+            <textarea name="respuesta" class="form-control mb-3" rows="4" required><?php echo $preg['respuesta']; ?></textarea>
 
-    Categoría: <br>
-    <input type="text" name="categoria" value="<?php echo $pregunta['categoria']; ?>" required><br><br>
+            <label>Categoría:</label>
+            <input type="text" name="categoria" class="form-control mb-3" value="<?php echo $preg['categoria']; ?>" required>
 
-    Orden: <br>
-    <input type="text" name="orden" value="<?php echo $pregunta['orden']; ?>" required><br><br>
+            <label>Orden:</label>
+            <input type="text" name="orden" class="form-control mb-3" value="<?php echo $preg['orden']; ?>" required>
 
-    <button type="submit" name="actualizar">Guardar Cambios</button>
-</form>
+            <button type="submit" name="actualizar" class="btn btn-guardar w-100">Guardar Cambios</button>
+            <a href="preguntas_frec.php" class="btn btn-volver w-100 mt-2">Volver</a>
+        </form>
+    </div>
+</div>
 
 <?php
 if (isset($_POST['actualizar'])) {
 
-    $preg = $_POST['pregunta'];
-    $resp = $_POST['respuesta'];
-    $cat = $_POST['categoria'];
-    $ord = $_POST['orden'];
+    $pregunta = $_POST['pregunta'];
+    $respuesta = $_POST['respuesta'];
+    $categoria = $_POST['categoria'];
+    $orden = $_POST['orden'];
 
     $sql = "UPDATE preguntas_frecuentes 
-            SET pregunta='$preg', respuesta='$resp', categoria='$cat', orden='$ord'
+            SET pregunta='$pregunta', respuesta='$respuesta', categoria='$categoria', orden='$orden'
             WHERE id_pregunta=$id";
 
     if ($conexion->query($sql)) {
         header("Location: preguntas_frec.php");
-        exit();
     } else {
-        echo "Error: " . $conexion->error;
+        echo $conexion->error;
     }
 }
 ?>

@@ -1,49 +1,63 @@
 <?php include("db.php"); ?>
+
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Agregar pregunta</title>
-    <link rel="stylesheet" href="../../css/bootstrap.min.css">
-    <script src="../../js/bootstrap.bundle.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Agregar Pregunta</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
-        body {
+        body{
             background: linear-gradient(135deg, #000000, #3a0505);
+        }
+        .card-form{
+            background-color:#330000;
+            color:white;
+            border:none;
+            padding:25px;
+            border-radius:10px;
+        }
+        .btn-guardar{
+            background-color:#990000;
+            color:white;
+        }
+        .btn-guardar:hover{
+            background-color:#cc0000;
+            color:white;
+        }
+        .btn-volver{
+            background-color:#555;
+            color:white;
+        }
+        .btn-volver:hover{
+            background-color:#777;
+            color:white;
         }
     </style>
 </head>
 
-<body class="text-light">
+<body class="p-4">
 
-<div class="container mt-5">
-
-    <h1 class="text-center mb-4 text-danger">Agregar Pregunta</h1>
-
-    <div class="card bg-danger text-white p-4 shadow-lg">
+<div class="container mt-4">
+    <div class="card card-form mx-auto" style="max-width:500px;">
+        <h2 class="text-center mb-3">Agregar Pregunta</h2>
 
         <form method="POST">
-            <div class="mb-3">
-                <label class="form-label">Pregunta:</label>
-                <input type="text" class="form-control" name="pregunta" required>
-            </div>
+            <label>Pregunta:</label>
+            <input type="text" name="pregunta" class="form-control mb-3" required>
 
-            <div class="mb-3">
-                <label class="form-label">Categoría:</label>
-                <input type="text" class="form-control" name="categoria" required>
-            </div>
+            <label>Categoría:</label>
+            <input type="text" name="categoria" class="form-control mb-3" required>
 
-            <div class="mb-3">
-                <label class="form-label">Orden:</label>
-                <input type="text" class="form-control" name="orden" required>
-            </div>
+            <label>Orden:</label>
+            <input type="text" name="orden" class="form-control mb-3" required>
 
-            <button type="submit" name="subir" class="btn btn-danger w-100 mt-3">
-                Guardar
-            </button>
+            <button type="submit" name="subir" class="btn btn-guardar w-100">Guardar</button>
+            <a href="preguntas_frec.php" class="btn btn-volver w-100 mt-2">Volver</a>
         </form>
-
     </div>
-
 </div>
 
 <?php
@@ -52,14 +66,13 @@ if (isset($_POST['subir'])) {
     $categoria = $_POST['categoria'];
     $orden = $_POST['orden'];
 
-    $sql = "INSERT INTO preguntas_frecuentes (pregunta, respuesta, categoria, orden)
-            VALUES ('$pregunta', '', '$categoria', '$orden')";
+    $sql = "INSERT INTO preguntas_frecuentes (pregunta, categoria, orden, respuesta)
+            VALUES ('$pregunta', '$categoria', '$orden', '')";
 
     if ($conexion->query($sql)) {
         header("Location: preguntas_frec.php");
-        exit;
     } else {
-        echo "Error: " . $conexion->error;
+        echo $conexion->error;
     }
 }
 ?>
