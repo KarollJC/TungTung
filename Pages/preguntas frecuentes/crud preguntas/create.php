@@ -1,38 +1,63 @@
 <?php include("db.php"); ?>
-
 <!DOCTYPE html>
 <html>
 <head>
     <title>Agregar pregunta</title>
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <script src="../../js/bootstrap.bundle.min.js"></script>
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #000000, #3a0505);
+        }
+    </style>
 </head>
-<body>
 
-<h1>Agregar pregunta</h1>
+<body class="text-light">
 
-<form method="POST">
-    pregunta: <input type="text" name="pregunta" required><br><br>
-    categoria de pregunta: <input type="text" name="categoria" required><br><br>
-    orden de la pregunta: <input type="text" name="orden" required><br><br>
+<div class="container mt-5">
 
-    <button type="submit" name="subir">Subir</button>
-</form>
+    <h1 class="text-center mb-4 text-danger">Agregar Pregunta</h1>
+
+    <div class="card bg-danger text-white p-4 shadow-lg">
+
+        <form method="POST">
+            <div class="mb-3">
+                <label class="form-label">Pregunta:</label>
+                <input type="text" class="form-control" name="pregunta" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Categoría:</label>
+                <input type="text" class="form-control" name="categoria" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Orden:</label>
+                <input type="text" class="form-control" name="orden" required>
+            </div>
+
+            <button type="submit" name="subir" class="btn btn-danger w-100 mt-3">
+                Guardar
+            </button>
+        </form>
+
+    </div>
+
+</div>
 
 <?php
 if (isset($_POST['subir'])) {
-
     $pregunta = $_POST['pregunta'];
     $categoria = $_POST['categoria'];
     $orden = $_POST['orden'];
 
-    // respuesta vacía por ahora
-    $respuesta = "";
-
     $sql = "INSERT INTO preguntas_frecuentes (pregunta, respuesta, categoria, orden)
-            VALUES ('$pregunta', '$respuesta', '$categoria', '$orden')";
+            VALUES ('$pregunta', '', '$categoria', '$orden')";
 
     if ($conexion->query($sql)) {
         header("Location: preguntas_frec.php");
-        exit();
+        exit;
     } else {
         echo "Error: " . $conexion->error;
     }
