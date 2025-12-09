@@ -22,3 +22,17 @@ button{
     font-weight: bold;
     transition: background 0.3s;
 }
+
+#title{
+    text-align: center;
+}
+
+#button{
+    background-color: red;
+    padding: 10px;
+    color: aliceblue;
+}
+
+p{
+    text-align: center;
+}
