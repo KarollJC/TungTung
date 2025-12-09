@@ -9,19 +9,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
     <style>
         body{
             background: linear-gradient(135deg, #000000, #3a0505);
         }
     </style>
 </head>
-<body class="text-white">
-
+<body class="text-black">
     <section class="d-flex justify-content-center align-items-center min-vh-100">
+        <div class="w-50 w-md-50 login">
 
-        <div class="w-25 w-md-50">
-
-            <h2 class="text-center mb-4">Crea tu cuenta</h2>
+            <h2 class="text-danger mb-4">Crea tu cuenta</h2><br>
 
             <?php if($mensaje_ok): ?>
                 <div class="alert alert-success text-center">
@@ -35,38 +34,43 @@
                 </div>
             <?php endif; ?>
 
-            <form method="post" action="Insert.php">
+            <form method="post" action="Insert.php" class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label">E-mail</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="usuario@usuario.com" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" id="contra" name="contra" required placeholder="Password">
+                </div><br><br><br><br>
 
-                <label class="form-label">E-mail</label>
-                <input type="email" name="email" id="email" class="form-control" required placeholder="ejemplo@correo.com">
-
-                <label class="form-label mt-2">Usuario</label>
-                <input type="text" name="user" id="user" class="form-control" required placeholder="Usuario">
-
-                <label class="form-label mt-2">Nombre</label>
-                <input type="text" name="nombre" id="nombre" class="form-control" required placeholder="Nombre">
-
-                <label class="form-label mt-2">Apellidos</label>
-                <input type="text" name="apellidos" id="apellidos" class="form-control" required placeholder="Apellidos">
-
-                <label class="form-label mt-2">Fecha de nacimiento</label>
-                <input type="date" name="fecha" id="fecha" class="form-control" required>
-
-                <label class="form-label mt-2">Contraseña</label>
-                <input type="password" name="contra" id="contra" class="form-control" required placeholder="Contraseña"><br>
-
-                <label>Teléfono</label>
-                <div class="input-group">
+                <div class="col-md-5">
+                    <label class="form-label">Usuario</label>
+                    <input type="text" class="form-control" id="user" name="user" required placeholder="Username">
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Fecha de nacimiento</label>
+                    <input type="date" class="form-control" id="fecha" name="fecha" required>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Teléfono</label>
+                    <div class="input-group">
                     <div class="input-group-text">+52</div>
-                    <input type="text" name="telefono" class="form-control" id="telefono" required placeholder="(123) 456-7890">
+                    <input type="text" class="form-control" id="telefono" name="telefono" required placeholder="(123) 456-7890">
+                    </div>
+                </div><br><br><br><br>
+                
+                <div class="col-md-5">
+                    <label class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" required placeholder="Name">
                 </div>
+                <div class="col-md-7">
+                    <label class="form-label">Apellidos</label>
+                    <input type="text" class="form-control" id="apellidos" name="apellidos" required placeholder="Last names">
+                </div><br><br><br><br>
 
-                <div class="mb-3 form-check mt-3">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
-                    <label class="form-check-label" for="exampleCheck1">Aceptar términos y condiciones</label>
-                </div>
 
-                <button type="submit" class="btn btn-outline-primary w-100">Continuar</button>
+                <button type="submit" class="btn btn-danger">Continuar</button>
 
                 <br><br>
                 <p class="text-center">¿Ya tienes una cuenta?</p>
@@ -75,11 +79,8 @@
                         Iniciar sesión
                     </a>
                 </p>
-
             </form>
-
         </div>
-
     </section>
 
     <script src="js/bootstrap.bundle.min.js"></script>
