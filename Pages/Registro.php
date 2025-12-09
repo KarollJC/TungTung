@@ -10,7 +10,7 @@
     <title>Registro</title>
 <<<<<<< HEAD:Registro/Registro.php
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/stylesRegistro.css">
 =======
     <link rel="stylesheet" href="../css/bootstrap.min.css">
 >>>>>>> 2d550785468839cd98a201412d88705e50d3dcba:Pages/Registro.php
