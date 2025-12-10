@@ -20,10 +20,6 @@ descripcion_corta varchar(100) not null,
 descripcion text not null
 );
 
-create table karol(
-
-);
-
 create table cascos(
 id_cascos int auto_increment primary key,
 marca varchar(50) not null,

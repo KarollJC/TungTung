@@ -1,7 +1,0 @@
-<?php
-$conexion = new mysqli("localhost", "tungtung", "pilin", "tungtung");
-
-if ($conexion->connect_error) {
-    die("Error en la conexión: " . $conexion->connect_error);
-}
-?>
