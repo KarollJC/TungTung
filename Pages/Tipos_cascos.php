@@ -1,13 +1,15 @@
 <?php
 require_once '../Libs/tungtungcrud.php';
 
+const MAX_CASCOS = 7;
 $mensaje = "";
 $informacion_cascos = [];
 
-$db = new Database('localhostlocalhost', 'tungtung', 'root', '');
+//$db = new Database('localhost', 'tungtung', 'root', '');
+$db = new Database('db', 'tungtung', 'angel', '1234');
 $conexion = $db->connect_db();
 
-$crud = new CRUD($conexion, 'cascos');
+$crud = new CRUD($conexion, 'tipos_cascos');
 $resultado = $crud->read();
 
 if($resultado && is_array($resultado) && count($resultado) > 0)
@@ -35,15 +37,20 @@ function display_carrousel_info($index)
     if(isset($informacion_cascos[$index]))
     {
         $casco = $informacion_cascos[$index];
-        echo "<h5>" . $casco['tipo_casco'] . "</h5>";
-        echo "<p>" . $casco['descripcion'] . "</p>";
+        echo "<h5>" . $casco['tipo'] . "</h5>";
+        echo "<p>" . $casco['descripcion_corta'] . "</p>";
     }
 }
 
 function get_tipo_casco($index)
 {
     global $informacion_cascos;
-    return isset($informacion_cascos[$index]) ? $informacion_cascos[$index]['tipo_casco'] : '';
+    return isset($informacion_cascos[$index]) ? $informacion_cascos[$index]['tipo'] : '';
+}
+function get_image_path($index)
+{
+    global $informacion_cascos;
+    return isset($informacion_cascos[$index]) ? $informacion_cascos[$index]['imagen'] : '';
 }
 ?>
 
@@ -82,7 +89,7 @@ function get_tipo_casco($index)
         </div>
         <div class="carousel-inner rounded shadow-lg overflow-hidden">
             <div class="carousel-item active">
-                <img src="../img/imgtest.gif" class="d-block w-100" alt="CascoIntegral">
+                <img src="<?= get_image_path(0); ?>" class="d-block w-100" alt="CascoIntegral">
                 <div class="carousel-caption">
                     <div class="d-block d-md-none">
                         <h5>
@@ -95,7 +102,7 @@ function get_tipo_casco($index)
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="../img/imgtest.png" class="d-block w-100" alt="CascoModular">
+                <img src="<?= get_image_path(1); ?>" class="d-block w-100" alt="CascoModular">
                 <div class="carousel-caption">
                     <div class="d-block d-md-none">
                         <h5>
@@ -108,7 +115,7 @@ function get_tipo_casco($index)
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="../img/imgtest.gif" class="d-block w-100" alt="CascoJet">
+                <img src="<?= get_image_path(2); ?>" class="d-block w-100" alt="CascoJet">
                 <div class="carousel-caption">
                     <div class="d-block d-md-none">
                         <h5>
@@ -121,7 +128,7 @@ function get_tipo_casco($index)
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="../img/imgtest.png" class="d-block w-100" alt="CascoClasico">
+                <img src="<?= get_image_path(3); ?>" class="d-block w-100" alt="CascoClasico">
                 <div class="carousel-caption">
                     <div class="d-block d-md-none">
                         <h5>
@@ -134,7 +141,7 @@ function get_tipo_casco($index)
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="../img/imgtest.png" class="d-block w-100" alt="CascoOffRoad">
+                <img src="<?= get_image_path(4); ?>" class="d-block w-100" alt="CascoOffRoad">
                 <div class="carousel-caption">
                     <div class="d-block d-md-none">
                         <h5>
@@ -147,7 +154,7 @@ function get_tipo_casco($index)
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="../img/imgtest.gif" class="d-block w-100" alt="CascoDual">
+                <img src="<?= get_image_path(5); ?>" class="d-block w-100" alt="CascoDual">
                 <div class="carousel-caption">
                     <div class="d-block d-md-none">
                         <h5>
@@ -160,7 +167,7 @@ function get_tipo_casco($index)
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="../img/imgtest.png" class="d-block w-100" alt="CascoTrail">
+                <img src="<?= get_image_path(6); ?>" class="d-block w-100" alt="CascoTrail">
                 <div class="carousel-caption">
                     <div class="d-block d-md-none">
                         <h5>
@@ -181,10 +188,58 @@ function get_tipo_casco($index)
         </button>
     </div>
 
-    <div>
-        <section>
-            <!-- -->
-        </section>
+    <h4 class="text-center mb-4 fw-bold">Existen varios tipos de cascos de motocicletas, cada uno diseñado para diferentes estilos de conducción y niveles de protección. Los principales tipos son:</h4>
+
+    <!---->
+    <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                    <?= get_tipo_casco(0); ?>
+            </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <p>
+                    <?=
+                        isset($informacion_cascos[0]) ? $informacion_cascos[0]['descripcion'] : '';
+                    ?>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                <?= get_tipo_casco(1); ?>
+            </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <p>
+                    <?=
+                        isset($informacion_cascos[1]) ? $informacion_cascos[1]['descripcion'] : '';
+                    ?>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                <?= get_tipo_casco(2); ?>
+            </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <p>
+                    <?=
+                        isset($informacion_cascos[2]) ? $informacion_cascos[2]['descripcion'] : '';
+                    ?>
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

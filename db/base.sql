@@ -12,6 +12,18 @@ contra varchar(20) not null,
 num_telefono varchar(12) not null
 );
 
+create table tipos_cascos(
+id_casco int auto_increment primary key,
+tipo varchar(50) not null,
+imagen varchar(50) not null,
+descripcion_corta varchar(100) not null,
+descripcion text not null
+);
+
+create table karol(
+
+);
+
 create table cascos(
 id_cascos int auto_increment primary key,
 marca varchar(50) not null,
@@ -43,6 +55,14 @@ categoria varchar(50) not null,
 orden varchar(40) not null
 );
 
+create table mensaje(
+id_mensajes int auto_increment primary key,
+usuario varchar(100) not null,
+email varchar(100) not null,
+mensaje text not null,
+compromiso tinyint(1) not null default 0,
+fecha datetime not null default current_timestamp
+);
+
 INSERT INTO accidentes (fecha, lugar, descripcion, causa, lesionados, uso_casco, nivel_gravedad)
 VALUES('2024-08-23','libramiento Uriangato','Un trágico accidente en el libramiento Uriangato, sobre la carretera federal Salamanca - Morelia, cobró la vida de un motociclista la noche de este jueves. Según el conductor del tráiler involucrado, la motocicleta circulaba sin luces, lo que pudo haber contribuido al fatal desenlace.','la moto no contaba con luces y el trailero no lo vio','1 fallecido','si','muy grave');
-
