@@ -1,75 +1,49 @@
 <?php
-const DB_HOST="localhost";
-const DB_USER="root";
-const DB_PASS='';
-const DB_DATABASE="tungtung";
-const DB_PORT=3306;
+require_once '../Libs/tungtungcrud.php';
+
 $mensaje = "";
+$informacion_cascos = [];
 
-$informacion_cascos = array();
+$db = new Database('localhostlocalhost', 'tungtung', 'root', '');
+$conexion = $db->connect_db();
 
-enum Nombres: int {
-    case Integral = 0;
-    case Modular = 1;
-    case Jet = 2;
-    case Calimero = 3;
-    case OffRoad = 4;
-    case Dual = 5;
-    case Trail = 6;
-};
-enum Cascos: int {
-    case id = 0;
-    case Marca = 1;
-    case Modelo = 2;
-    case Tipo_de_casco = 3;
-    case Certificacion= 4;
-    case Descripcion = 5;
-    case Descripcion_detallada = 6;
-    case Precio = 7;
-    case Fecha_registro = 8;
-};
+$crud = new CRUD($conexion, 'cascos');
+$resultado = $crud->read();
 
-$conexion = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_DATABASE, DB_PORT);
-
-if(!$conexion)
+if($resultado && is_array($resultado) && count($resultado) > 0)
 {
-    $mensaje = "Error: No se pudo conectar a la base de datos." . mysqli_connect_error();
-    exit();
-}
-
-$consulta = "SELECT * FROM cascos";
-$resultado = mysqli_query($conexion, $consulta);
-
-if($resultado != null && mysqli_num_rows($resultado) > 0)
-{
-    $index = 0;
-    $fields = ['id_cascos', 'marca', 'modelo', 'tipo_casco', 'certificacion', 'descripcion', 'descripcion_detallada', 'precio', 'fecha_registro'];
-
-    while($datos_casco = mysqli_fetch_assoc($resultado))
+    foreach($resultado as $datos_casco)
     {
-        $informacion_cascos[$index] = array();
-
-        for($i=0; $i<count($fields); $i++)
+        $casco_procesado = [];
+        foreach($datos_casco as $key => $value)
         {
-            $informacion_cascos[$index][$i] = htmlspecialchars($datos_casco[$fields[$i]]);
+            $casco_procesado[$key] = htmlspecialchars($value);
         }
-        $index++;
+        $informacion_cascos[] = $casco_procesado;
     }
 }
 else
 {
-    $mensaje = "Error interno.";
+    $mensaje = "Error interno: No se encontraron cascos en la base de datos.";
 }
-mysqli_close($conexion);
 
-function display_carrousel_info($tipo_casco)
+$db->close_connection();
+
+function display_carrousel_info($index)
 {
     global $informacion_cascos;
-    $casco = $informacion_cascos[$tipo_casco][Cascos::Tipo_de_casco->value];
-    $descripcion_corta = $informacion_cascos[$tipo_casco][Cascos::Descripcion->value];
+    if(isset($informacion_cascos[$index]))
+    {
+        $casco = $informacion_cascos[$index];
+        echo "<h5>" . $casco['tipo_casco'] . "</h5>";
+        echo "<p>" . $casco['descripcion'] . "</p>";
+    }
+}
 
-    echo "<h5>" . $casco . "</h5>";
-    echo "<p>"  . $descripcion_corta . "</p>";
+function get_tipo_casco($index)
+{
+    global $informacion_cascos;
+    return isset($informacion_cascos[$index]) ? $informacion_cascos[$index]['tipo_casco'] : '';
 }
 ?>
 
@@ -79,7 +53,7 @@ function display_carrousel_info($tipo_casco)
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tipos de Cascos</title>
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <style>
         body {
             background: linear-gradient(135deg, #000000, #3a0505);
@@ -94,7 +68,7 @@ function display_carrousel_info($tipo_casco)
 <body>
 <div class="container py-5">
     <h1 class="text-center mb-4 fw-bold">Tipos de Cascos en Motocicletas</h1>
-    <h4 class="text-center mb-4 fw-bold"><?= $mensaje ?></h4>
+    <h6 class="text-center mb-4 fw-bold" style="color: #ff0000;"><?= $mensaje ?></h6>
 
     <div id="carouselCascos" class="carousel slide mb-4 carousel-fade" data-bs-ride="carousel">
         <div class="carousel-indicators">
@@ -106,17 +80,17 @@ function display_carrousel_info($tipo_casco)
             <button type="button" data-bs-target="#carouselCascos" data-bs-slide-to="5"></button>
             <button type="button" data-bs-target="#carouselCascos" data-bs-slide-to="6"></button>
         </div>
-        <div class="carousel-inner rounded shadow-lg overflow-hidden">+
+        <div class="carousel-inner rounded shadow-lg overflow-hidden">
             <div class="carousel-item active">
                 <img src="../img/imgtest.gif" class="d-block w-100" alt="CascoIntegral">
                 <div class="carousel-caption">
                     <div class="d-block d-md-none">
                         <h5>
-                            <?php echo $informacion_cascos[Nombres::Integral->value][Cascos::Tipo_de_casco->value]; ?>
+                            <?php echo get_tipo_casco(0); ?>
                         </h5>
                     </div>
                     <div class="d-none d-md-block">
-                        <?php display_carrousel_info(Nombres::Integral->value); ?>
+                        <?php display_carrousel_info(0); ?>
                     </div>
                 </div>
             </div>
@@ -125,11 +99,11 @@ function display_carrousel_info($tipo_casco)
                 <div class="carousel-caption">
                     <div class="d-block d-md-none">
                         <h5>
-                            <?php echo $informacion_cascos[Nombres::Modular->value][Cascos::Tipo_de_casco->value]; ?>
+                            <?php echo get_tipo_casco(1); ?>
                         </h5>
                     </div>
                     <div class="d-none d-md-block">
-                        <?php display_carrousel_info(Nombres::Modular->value); ?>
+                        <?php display_carrousel_info(1); ?>
                     </div>
                 </div>
             </div>
@@ -138,11 +112,11 @@ function display_carrousel_info($tipo_casco)
                 <div class="carousel-caption">
                     <div class="d-block d-md-none">
                         <h5>
-                            <?php echo $informacion_cascos[Nombres::Jet->value][Cascos::Tipo_de_casco->value]; ?>
+                            <?php echo get_tipo_casco(2); ?>
                         </h5>
                     </div>
                     <div class="d-none d-md-block">
-                        <?php display_carrousel_info(Nombres::Jet->value); ?>
+                        <?php display_carrousel_info(2); ?>
                     </div>
                 </div>
             </div>
@@ -151,11 +125,11 @@ function display_carrousel_info($tipo_casco)
                 <div class="carousel-caption">
                     <div class="d-block d-md-none">
                         <h5>
-                            <?php echo $informacion_cascos[Nombres::Calimero->value][Cascos::Tipo_de_casco->value]; ?>
+                            <?php echo get_tipo_casco(3); ?>
                         </h5>
                     </div>
                     <div class="d-none d-md-block">
-                        <?php display_carrousel_info(Nombres::Calimero->value); ?>
+                        <?php display_carrousel_info(3); ?>
                     </div>
                 </div>
             </div>
@@ -164,11 +138,11 @@ function display_carrousel_info($tipo_casco)
                 <div class="carousel-caption">
                     <div class="d-block d-md-none">
                         <h5>
-                            <?php echo $informacion_cascos[Nombres::OffRoad->value][Cascos::Tipo_de_casco->value]; ?>
+                            <?php echo get_tipo_casco(4); ?>
                         </h5>
                     </div>
                     <div class="d-none d-md-block">
-                        <?php display_carrousel_info(Nombres::OffRoad->value); ?>
+                        <?php display_carrousel_info(4); ?>
                     </div>
                 </div>
             </div>
@@ -177,11 +151,11 @@ function display_carrousel_info($tipo_casco)
                 <div class="carousel-caption">
                     <div class="d-block d-md-none">
                         <h5>
-                            <?php echo $informacion_cascos[Nombres::Dual->value][Cascos::Tipo_de_casco->value]; ?>
+                            <?php echo get_tipo_casco(5); ?>
                         </h5>
                     </div>
                     <div class="d-none d-md-block">
-                        <?php display_carrousel_info(Nombres::Dual->value); ?>
+                        <?php display_carrousel_info(5); ?>
                     </div>
                 </div>
             </div>
@@ -190,11 +164,11 @@ function display_carrousel_info($tipo_casco)
                 <div class="carousel-caption">
                     <div class="d-block d-md-none">
                         <h5>
-                            <?php echo $informacion_cascos[Nombres::Trail->value][Cascos::Tipo_de_casco->value]; ?>
+                            <?php echo get_tipo_casco(6); ?>
                         </h5>
                     </div>
                     <div class="d-none d-md-block">
-                        <?php display_carrousel_info(Nombres::Trail->value); ?>
+                        <?php display_carrousel_info(6); ?>
                     </div>
                 </div>
             </div>
@@ -214,6 +188,6 @@ function display_carrousel_info($tipo_casco)
     </div>
 </div>
 
-<script src="../js/bootstrap.bundle.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

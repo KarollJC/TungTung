@@ -19,7 +19,7 @@ modelo varchar(50) not null,
 tipo_casco varchar(50) not null,
 certificacion varchar(60) not null,
 descripcion varchar(100) not null,
-descripcion_detallada text not null,
+imagen varchar(50) not null,
 precio double not null,
 fecha_registro date not null
 );
