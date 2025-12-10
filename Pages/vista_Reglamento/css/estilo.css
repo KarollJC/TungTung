@@ -1,0 +1,32 @@
+#title{
+    text-align: center;
+}
+
+#button{
+    background-color: red;
+    padding: 10px;
+    color: aliceblue;
+}
+
+p{
+    text-align: center;
+    color: aliceblue;
+}
+
+.body{
+    background-color: rgb(0, 0, 0);
+}
+
+div{
+    color: rgb(255, 255, 255);
+}
+
+header{
+    color: brown;
+    background-color: brown;
+}
+
+h1{
+    background-color: brown;
+}
+

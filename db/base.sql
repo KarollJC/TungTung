@@ -40,12 +40,11 @@ create table accidentes(
 id_accidentes int auto_increment primary key,
 fecha date not null,
 lugar varchar(100) not null,
-descripcion varchar(100) not null,
-causa varchar(50) not null,
-lesionados int not null,
+descripcion varchar(300) not null,
+causa varchar(100) not null,
+lesionados varchar(50) not null,
 uso_casco varchar(10) not null,
-nivel_gravedad varchar(40) not null,
-imagen_evidencia mediumblob 
+nivel_gravedad varchar(40) not null
 );
 
 create table preguntas_frecuentes(
@@ -65,22 +64,5 @@ compromiso tinyint(1) not null default 0,
 fecha datetime not null default current_timestamp
 );
 
--- DELETE BEFORE COMMIT // add
-
-INSERT INTO cascos VALUES
-(1, "marca1", "modelo1", "tipo casco1", "certific1", "desc1", "descdet1", 100.0, '2025-12-08'),
-(2, "marca2", "modelo2", "tipo casco2", "certific2", "desc2", "descdet2", 100.0, '2025-12-08'),
-(3, "marca3", "modelo3", "tipo casco3", "certific3", "desc3", "descdet3", 100.0, '2025-12-08'),
-(4, "marca4", "modelo4", "tipo casco4", "certific4", "desc4", "descdet4", 100.0, '2025-12-08'),
-(5, "marca5", "modelo5", "tipo casco5", "certific5", "desc5", "descdet5", 100.0, '2025-12-08'),
-(6, "marca6", "modelo6", "tipo casco6", "certific6", "desc6", "descdet6", 100.0, '2025-12-08'),
-(7, "marca7", "modelo7", "tipo casco7", "certific7", "desc7", "descdet7", 100.0, '2025-12-08');
-
-INSERT INTO tipos_cascos VALUES
-(1, "tipo1", "../img/imgtest.gif", "h1 u got one", "dont go to the front tough"),
-(2, "tipo2", "../img/imgtest.png", "h1 u got one", "dont go to the front tough"),
-(3, "tipo3", "../img/imgtest.gif", "h1 u got one", "dont go to the front tough"),
-(4, "tipo4", "../img/imgtest.png", "h1 u got one", "dont go to the front tough"),
-(5, "tipo5", "../img/imgtest.gif", "h1 u got one", "dont go to the front tough"),
-(6, "tipo6", "../img/imgtest.png", "h1 u got one", "dont go to the front tough"),
-(7, "tipo7", "../img/imgtest.gif", "h1 u got one", "dont go to the front tough");
+INSERT INTO accidentes (fecha, lugar, descripcion, causa, lesionados, uso_casco, nivel_gravedad)
+VALUES('2024-08-23','libramiento Uriangato','Un trágico accidente en el libramiento Uriangato, sobre la carretera federal Salamanca - Morelia, cobró la vida de un motociclista la noche de este jueves. Según el conductor del tráiler involucrado, la motocicleta circulaba sin luces, lo que pudo haber contribuido al fatal desenlace.','la moto no contaba con luces y el trailero no lo vio','1 fallecido','si','muy grave');
