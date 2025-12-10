@@ -39,7 +39,7 @@ fecha date not null,
 lugar varchar(100) not null,
 descripcion varchar(300) not null,
 causa varchar(100) not null,
-lesionados varchar(100) not null,
+lesionados varchar(150) not null,
 uso_casco varchar(100) not null,
 nivel_gravedad varchar(40) not null
 );
@@ -65,5 +65,9 @@ INSERT INTO accidentes
 (fecha, lugar, descripcion, causa, lesionados, uso_casco, nivel_gravedad)
 VALUES
 ('2024-08-23','libramiento Uriangato','Un trágico accidente en el libramiento Uriangato, sobre la carretera federal Salamanca - Morelia, cobró la vida de un motociclista la noche de este jueves. Según el conductor del tráiler involucrado, la motocicleta circulaba sin luces, lo que pudo haber contribuido al fatal desenlace.','la moto no contaba con luces y el trailero no lo vio','1 fallecido','si','muy grave'),
-('2023-03-27','Bulevar Juárez (esquina calle Río Hondo), Uriangato','Una motocicleta con varios ocupantes, cuatro adultos y un bebé, derrapó durante la madrugada.','Al parecer exceso de velocidad y falta de precaución.','1 fallecido (hombre de 52 años)','No se menciona','Grave (muerte + múltiples lesionados)');
+('2023-03-27','Bulevar Juárez (esquina calle Río Hondo), Uriangato','Una motocicleta con varios ocupantes, cuatro adultos y un bebé, derrapó durante la madrugada.','Al parecer exceso de velocidad y falta de precaución.','1 fallecido (hombre de 52 años), varios heridos: dos hombres (48 y 32 años), una mujer (26), un bebé de 9 meses.','no se menciona','grave (muerte + múltiples lesionados)'),
+('2025-07-20','carretera Uriangato-Morelia, comunidad La Cinta','Un hombre derrapó en su motocicleta y cayó a orillas de la carretera; fue encontrado inconsciente y con lesiones graves.','exceso de velocidad (derrape)','1 lesionado en estado delicado','no','muy grave'),
+('2024-05-20','bulevar Uriangato','Padre e hijo motociclistas fueron embestidos por una camioneta mientras circulaban sobre el bulevar; quedaron tirados en la vía junto con su moto y la camioneta terminó estrellada contra una vivienda.','impacto por camioneta que colisionó la motocicleta','2 fallecidos (padre de 49 y su hijo de 19 años)','no reportado','muy grave (fallecidos)'),
+('2024-06-08','Moroleón / Uriangato','Una motociclista resultó lesionada tras chocar por alcance con otra moto y fue trasladada al hospital.','alcance entre motocicletas','1 lesionada','no se menciona','moderado-grave');
+
 
