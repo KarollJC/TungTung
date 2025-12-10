@@ -12,6 +12,15 @@ contra varchar(20) not null,
 num_telefono varchar(12) not null
 );
 
+create table tipos_cascos(
+id_casco int auto_increment primary key,
+tipo varchar(50) not null,
+imagen varchar(50) not null,
+descripcion_corta varchar(100) not null,
+descripcion text not null
+);
+
+
 create table cascos(
 id_cascos int auto_increment primary key,
 marca varchar(50) not null,
@@ -30,8 +39,8 @@ fecha date not null,
 lugar varchar(100) not null,
 descripcion varchar(300) not null,
 causa varchar(100) not null,
-lesionados varchar(50) not null,
-uso_casco varchar(10) not null,
+lesionados varchar(100) not null,
+uso_casco varchar(100) not null,
 nivel_gravedad varchar(40) not null
 );
 
@@ -43,6 +52,18 @@ categoria varchar(50) not null,
 orden varchar(40) not null
 );
 
-INSERT INTO accidentes (fecha, lugar, descripcion, causa, lesionados, uso_casco, nivel_gravedad)
-VALUES('2024-08-23','libramiento Uriangato','Un trágico accidente en el libramiento Uriangato, sobre la carretera federal Salamanca - Morelia, cobró la vida de un motociclista la noche de este jueves. Según el conductor del tráiler involucrado, la motocicleta circulaba sin luces, lo que pudo haber contribuido al fatal desenlace.','la moto no contaba con luces y el trailero no lo vio','1 fallecido','si','muy grave');
+create table mensaje(
+id_mensajes int auto_increment primary key,
+usuario varchar(100) not null,
+email varchar(100) not null,
+mensaje text not null,
+compromiso tinyint(1) not null default 0,
+fecha datetime not null default current_timestamp
+);
+
+INSERT INTO accidentes 
+(fecha, lugar, descripcion, causa, lesionados, uso_casco, nivel_gravedad)
+VALUES
+('2024-08-23','libramiento Uriangato','Un trágico accidente en el libramiento Uriangato, sobre la carretera federal Salamanca - Morelia, cobró la vida de un motociclista la noche de este jueves. Según el conductor del tráiler involucrado, la motocicleta circulaba sin luces, lo que pudo haber contribuido al fatal desenlace.','la moto no contaba con luces y el trailero no lo vio','1 fallecido','si','muy grave'),
+('2023-03-27','Bulevar Juárez (esquina calle Río Hondo), Uriangato','Una motocicleta con varios ocupantes, cuatro adultos y un bebé, derrapó durante la madrugada.','Al parecer exceso de velocidad y falta de precaución.','1 fallecido (hombre de 52 años)','No se menciona','Grave (muerte + múltiples lesionados)');
 
