@@ -19,7 +19,7 @@ modelo varchar(50) not null,
 tipo_casco varchar(50) not null,
 certificacion varchar(60) not null,
 descripcion varchar(100) not null,
-descripcion_detallada text not null,
+imagen varchar(50) not null,
 precio double not null,
 fecha_registro date not null
 );
@@ -28,12 +28,11 @@ create table accidentes(
 id_accidentes int auto_increment primary key,
 fecha date not null,
 lugar varchar(100) not null,
-descripcion varchar(100) not null,
-causa varchar(50) not null,
-lesionados int not null,
+descripcion varchar(300) not null,
+causa varchar(100) not null,
+lesionados varchar(50) not null,
 uso_casco varchar(10) not null,
-nivel_gravedad varchar(40) not null,
-imagen_evidencia mediumblob 
+nivel_gravedad varchar(40) not null
 );
 
 create table preguntas_frecuentes(
@@ -43,3 +42,7 @@ respuesta varchar(120) not null,
 categoria varchar(50) not null,
 orden varchar(40) not null
 );
+
+INSERT INTO accidentes (fecha, lugar, descripcion, causa, lesionados, uso_casco, nivel_gravedad)
+VALUES('2024-08-23','libramiento Uriangato','Un trágico accidente en el libramiento Uriangato, sobre la carretera federal Salamanca - Morelia, cobró la vida de un motociclista la noche de este jueves. Según el conductor del tráiler involucrado, la motocicleta circulaba sin luces, lo que pudo haber contribuido al fatal desenlace.','la moto no contaba con luces y el trailero no lo vio','1 fallecido','si','muy grave');
+
