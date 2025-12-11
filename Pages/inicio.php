@@ -122,7 +122,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="collapse navbar-collapse" id="navbarContent">
                 <div class="navbar-nav mx-auto justify-content-center flex-wrap">
                     <button class="btn btn-outline-light nav-btn mx-2 my-1">
-                        <a href="#">Prácticas seguras</a>
+                        <a href="Practicas_seguras/Practicas seguras/codigo.html">Prácticas seguras</a>
                     </button>
                     <button class="btn btn-outline-light nav-btn mx-2 my-1">
                         <a href="Tipos_cascos.php">Tipos de Cascos</a>
@@ -131,7 +131,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <a href="vista_Reglamento/reglamento.html">Reglamento</a>
                     </button>
                     <button class="btn btn-outline-light nav-btn mx-2 my-1">
-                        <a href="accidentes motocicleta/accidentes.php">Accidentes</a>
+                        <a href="accidentes motocicleta/crud_accidentesmoto/accidentes.php">Accidentes</a>
                     </button>
                     <button class="btn btn-outline-light nav-btn mx-2 my-1">
                         <a href="preguntas_frecuentes/crud_preguntas/preguntas_frec.php">Preguntas Frecuentes</a>
