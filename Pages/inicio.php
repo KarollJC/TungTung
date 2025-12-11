@@ -134,10 +134,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <a href="accidentes motocicleta/accidentes.php">Accidentes</a>
                     </button>
                     <button class="btn btn-outline-light nav-btn mx-2 my-1">
-                        <a href="preguntas frecuentes/crud preguntas/preguntas_frec.php">Preguntas Frecuentes</a>
+                        <a href="preguntas_frecuentes/crud_preguntas/preguntas_frec.php">Preguntas Frecuentes</a>
                     </button>
                     <button class="btn btn-outline-light nav-btn mx-2 my-1">
-                        <a href="#">Contacto</a>
+                        <a href="Contacto.php">Contacto</a>
                     </button>
                 </div>
                 <div class="d-flex justify-content-end ms-lg-3 mt-3 mt-lg-0">
