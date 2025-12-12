@@ -9,6 +9,7 @@ $preg = $q->fetch_assoc();
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Editar Pregunta</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -17,6 +18,11 @@ $preg = $q->fetch_assoc();
         body{
             background: linear-gradient(135deg, #000000, #3a0505);
         }
+
+        h2{
+            font-size: clamp(22px, 4vw, 32px);
+        }
+
         .card-form{
             background-color:#330000;
             color:white;
@@ -24,29 +30,50 @@ $preg = $q->fetch_assoc();
             padding:25px;
             border-radius:10px;
         }
+
+        label{
+            font-size: clamp(14px, 2.5vw, 18px);
+        }
+
+        .form-control{
+            font-size: clamp(14px, 2.5vw, 18px);
+        }
+
+        textarea{
+            resize:none;
+        }
+
         .btn-guardar{
             background-color:#990000;
             color:white;
+            font-size: clamp(14px, 3vw, 18px);
         }
         .btn-guardar:hover{
             background-color:#cc0000;
-            color:white;
         }
+
         .btn-volver{
             background-color:#555;
             color:white;
+            font-size: clamp(14px, 3vw, 18px);
         }
         .btn-volver:hover{
             background-color:#777;
-            color:white;
         }
+
+        @media (max-width: 768px){
+            .card-form{
+                padding:18px;
+            }
+        }
+
     </style>
 </head>
 
 <body class="p-4">
 
-<div class="container mt-4">
-    <div class="card card-form mx-auto" style="max-width:600px;">
+<div class="container mt-4" style="max-width:650px;">
+    <div class="card card-form mx-auto">
         <h2 class="text-center mb-3">Editar / Responder Pregunta</h2>
 
         <form method="POST">
@@ -60,7 +87,7 @@ $preg = $q->fetch_assoc();
             <input type="text" name="categoria" class="form-control mb-3" value="<?php echo $preg['categoria']; ?>" required>
 
             <label>Orden:</label>
-            <input type="text" name="orden" class="form-control mb-3" value="<?php echo $preg['orden']; ?>" required>
+            <input type="number" name="orden" class="form-control mb-3" value="<?php echo $preg['orden']; ?>" required>
 
             <button type="submit" name="actualizar" class="btn btn-guardar w-100">Guardar Cambios</button>
             <a href="preguntas_frec.php" class="btn btn-volver w-100 mt-2">Volver</a>
@@ -87,6 +114,5 @@ if (isset($_POST['actualizar'])) {
     }
 }
 ?>
-
 </body>
 </html>
