@@ -6,6 +6,7 @@
     <title>Contacto</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/stylesContacto.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         
     </style>
@@ -118,6 +119,22 @@
             </form>
         </div>
     </section>
+
+    <div>
+        <footer class="bg-dark text-center text-white">
+            <div class="container p-4 pb-0">
+                <section class="mb-4">
+                <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/KarollJC/TungTung" role="button"
+                    ><i class="fab fa-github"></i
+                ></a>
+                </section>
+            </div>
+
+            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+                © 2025 TungTungcitos
+            </div>
+        </footer>
+    </div>
 
     <script src="js/bootstrap.bundle.min.js"></script>
 </body>
