@@ -113,7 +113,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body class="text-white">
 <nav class="navbar navbar-expand-lg navbar-custom py-3">
         <div class="container-fluid">
-            <a class="navbar-brand text-white fw-bold d-none d-md-block" href="#">
+            <a class="navbar-brand text-white fw-bold d-none d-md-block" href="inicio.php">
                 Seguridad Vial
             </a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">

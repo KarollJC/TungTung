@@ -22,7 +22,7 @@
 </head>
 <body class="text-black">
     <section class="d-flex justify-content-center align-items-center min-vh-100">
-        <div class="w-50 w-md-50 login">
+        <div class="login p-4 w-100" id="formContainer">
 
             <h2 class="text-danger mb-4">Crea tu cuenta</h2><br>
 
@@ -38,7 +38,7 @@
                 </div>
             <?php endif; ?>
 
-            <form method="post" action="Insert.php" class="row g-3">
+            <form method="post" action="Insert_registro.php" class="row g-3">
                 <div class="col-md-6">
                     <label class="form-label">E-mail</label>
                     <input type="email" class="form-control" id="email" name="email" placeholder="usuario@usuario.com" required>
@@ -79,7 +79,7 @@
                 <br><br>
                 <p class="text-center">¿Ya tienes una cuenta?</p>
                 <p class="text-center">
-                    <a href="#" class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
+                    <a href="login.php" class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
                         Iniciar sesión
                     </a>
                 </p>
