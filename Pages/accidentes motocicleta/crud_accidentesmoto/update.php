@@ -1,15 +1,16 @@
 <?php 
 include("db.php");
+
 $id = $_GET['id'];
-$q = $conexion->query("SELECT * FROM preguntas_frecuentes WHERE id_pregunta=$id");
-$preg = $q->fetch_assoc();
+$q = $conexion->query("SELECT * FROM accidentes WHERE id_accidentes=$id");
+$accidente = $q->fetch_assoc();
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Editar Pregunta</title>
+    <title>Editar Accidente</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -30,7 +31,6 @@ $preg = $q->fetch_assoc();
         }
         .btn-guardar:hover{
             background-color:#cc0000;
-            color:white;
         }
         .btn-volver{
             background-color:#555;
@@ -38,7 +38,9 @@ $preg = $q->fetch_assoc();
         }
         .btn-volver:hover{
             background-color:#777;
-            color:white;
+        }
+        label{
+            font-weight:bold;
         }
     </style>
 </head>
@@ -46,24 +48,61 @@ $preg = $q->fetch_assoc();
 <body class="p-4">
 
 <div class="container mt-4">
-    <div class="card card-form mx-auto" style="max-width:600px;">
-        <h2 class="text-center mb-3">Editar / Responder Pregunta</h2>
+    <div class="card card-form mx-auto" style="max-width:700px;">
+        <h2 class="text-center mb-3">Editar Información del Accidente</h2>
 
         <form method="POST">
-            <label>Pregunta:</label>
-            <input type="text" name="pregunta" class="form-control mb-3" value="<?php echo $preg['pregunta']; ?>" required>
 
-            <label>Respuesta:</label>
-            <textarea name="respuesta" class="form-control mb-3" rows="4" required><?php echo $preg['respuesta']; ?></textarea>
+            <label>Fecha:</label>
+            <input type="date" name="fecha" class="form-control mb-3"
+                   value="<?php echo $accidente['fecha']; ?>" required>
 
-            <label>Categoría:</label>
-            <input type="text" name="categoria" class="form-control mb-3" value="<?php echo $preg['categoria']; ?>" required>
+            <label>Lugar:</label>
+            <input type="text" name="lugar" class="form-control mb-3"
+                   value="<?php echo $accidente['lugar']; ?>" required>
 
-            <label>Orden:</label>
-            <input type="text" name="orden" class="form-control mb-3" value="<?php echo $preg['orden']; ?>" required>
+            <label>Descripción:</label>
+            <textarea name="descripcion" class="form-control mb-3" rows="4" required><?php echo $accidente['descripcion']; ?></textarea>
 
-            <button type="submit" name="actualizar" class="btn btn-guardar w-100">Guardar Cambios</button>
-            <a href="preguntas_frec.php" class="btn btn-volver w-100 mt-2">Volver</a>
+            <label>Causa:</label>
+            <input type="text" name="causa" class="form-control mb-3"
+                   value="<?php echo $accidente['causa']; ?>" required>
+
+            <label>Lesionados:</label>
+            <input type="text" name="lesionados" class="form-control mb-3"
+                   value="<?php echo $accidente['lesionados']; ?>" required>
+
+            <label>Uso de casco:</label>
+            <select name="uso_casco" class="form-control mb-3" required>
+                <option value="<?php echo $accidente['uso_casco']; ?>">
+                    <?php echo $accidente['uso_casco']; ?>
+                </option>
+                <option value="si">Sí</option>
+                <option value="no">No</option>
+                <option value="no se menciona">No se menciona</option>
+                <option value="no reportado">No reportado</option>
+            </select>
+
+            <label>Nivel de gravedad:</label>
+            <select name="nivel_gravedad" class="form-control mb-3" required>
+                <option value="<?php echo $accidente['nivel_gravedad']; ?>">
+                    <?php echo $accidente['nivel_gravedad']; ?>
+                </option>
+                <option value="leve">Leve</option>
+                <option value="moderado">Moderado</option>
+                <option value="moderado-grave">Moderado-Grave</option>
+                <option value="grave">Grave</option>
+                <option value="muy grave">Muy grave</option>
+            </select>
+
+            <button type="submit" name="actualizar" class="btn btn-guardar w-100">
+                Guardar Cambios
+            </button>
+
+            <a href="accidentes.php" class="btn btn-volver w-100 mt-2">
+                Volver
+            </a>
+
         </form>
     </div>
 </div>
@@ -71,17 +110,26 @@ $preg = $q->fetch_assoc();
 <?php
 if (isset($_POST['actualizar'])) {
 
-    $pregunta = $_POST['pregunta'];
-    $respuesta = $_POST['respuesta'];
-    $categoria = $_POST['categoria'];
-    $orden = $_POST['orden'];
+    $fecha = $_POST['fecha'];
+    $lugar = $_POST['lugar'];
+    $descripcion = $_POST['descripcion'];
+    $causa = $_POST['causa'];
+    $lesionados = $_POST['lesionados'];
+    $uso_casco = $_POST['uso_casco'];
+    $nivel_gravedad = $_POST['nivel_gravedad'];
 
-    $sql = "UPDATE preguntas_frecuentes 
-            SET pregunta='$pregunta', respuesta='$respuesta', categoria='$categoria', orden='$orden'
-            WHERE id_pregunta=$id";
+    $sql = "UPDATE accidentes SET
+            fecha='$fecha',
+            lugar='$lugar',
+            descripcion='$descripcion',
+            causa='$causa',
+            lesionados='$lesionados',
+            uso_casco='$uso_casco',
+            nivel_gravedad='$nivel_gravedad'
+            WHERE id_accidentes=$id";
 
     if ($conexion->query($sql)) {
-        header("Location: preguntas_frec.php");
+        header("Location: accidentes.php");
     } else {
         echo $conexion->error;
     }
