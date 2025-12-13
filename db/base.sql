@@ -1,6 +1,11 @@
 create database if not exists tungtung;
 use tungtung;
 
+-- Team members user
+create user 'tungtungcitos'@'%' identified by '1234';
+grant all privileges on tungtung.* to 'tungtungcitos'@'%';
+flush privileges;
+
 create table usuarios(
 id_usuario int auto_increment primary key,
 email varchar(100) not null,
