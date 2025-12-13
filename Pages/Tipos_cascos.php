@@ -190,59 +190,87 @@ function get_image_path($index)
 
     <h4 class="text-center mb-4 fw-bold">Existen varios tipos de cascos de motocicletas, cada uno diseñado para diferentes estilos de conducción y niveles de protección. Los principales tipos son:</h4>
 
-    <!---->
-    <div class="accordion" id="accordionExample">
-        <div class="accordion-item">
-            <h2 class="accordion-header">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                    <?= get_tipo_casco(0); ?>
-            </button>
-            </h2>
-            <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                    <p>
-                    <?=
-                        isset($informacion_cascos[0]) ? $informacion_cascos[0]['descripcion'] : '';
-                    ?>
-                    </p>
-                </div>
-            </div>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12 col-md-4 d-flex justify-content-center align-items-start">
+            <img id="previewImg" src="../img/imgtest.gif" class="img-fluid rounded" alt="Imagen casco">
         </div>
-        <div class="accordion-item">
-            <h2 class="accordion-header">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                <?= get_tipo_casco(1); ?>
-            </button>
-            </h2>
-            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                    <p>
-                    <?=
-                        isset($informacion_cascos[1]) ? $informacion_cascos[1]['descripcion'] : '';
-                    ?>
-                    </p>
+
+        <div class="col-12 col-md-8">
+            <div class="accordion" id="accordionExample">
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                        <?= get_tipo_casco(0); ?>
+                    </button>
+                    </h2>
+
+                    <div id="collapseOne"
+                        class="accordion-collapse collapse"
+                        data-bs-parent="#accordionExample"
+                        data-img="<?= get_image_path(0); ?>">
+
+                        <div class="accordion-body">
+                            <p><?= isset($informacion_cascos[0]) ? $informacion_cascos[0]['descripcion'] : ''; ?></p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="accordion-item">
-            <h2 class="accordion-header">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                <?= get_tipo_casco(2); ?>
-            </button>
-            </h2>
-            <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                    <p>
-                    <?=
-                        isset($informacion_cascos[2]) ? $informacion_cascos[2]['descripcion'] : '';
-                    ?>
-                    </p>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                        <?= get_tipo_casco(1); ?>
+                    </button>
+                    </h2>
+
+                    <div id="collapseTwo"
+                        class="accordion-collapse collapse"
+                        data-bs-parent="#accordionExample"
+                        data-img="<?= get_image_path(1); ?>">
+
+                        <div class="accordion-body">
+                            <p><?= isset($informacion_cascos[1]) ? $informacion_cascos[1]['descripcion'] : ''; ?></p>
+                        </div>
+                    </div>
                 </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                        <?= get_tipo_casco(2); ?>
+                    </button>
+                    </h2>
+
+                    <div id="collapseThree"
+                        class="accordion-collapse collapse"
+                        data-bs-parent="#accordionExample"
+                        data-img="<?= get_image_path(2); ?>">
+
+                        <div class="accordion-body">
+                            <p><?= isset($informacion_cascos[2]) ? $informacion_cascos[2]['descripcion'] : ''; ?></p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
 </div>
 
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const preview = document.getElementById('previewImg');
+    const collapses = document.querySelectorAll('.accordion-collapse');
+
+    collapses.forEach(collapse => {
+        collapse.addEventListener('show.bs.collapse', () => {
+            const nuevaImagen = collapse.getAttribute('data-img');
+            preview.src = nuevaImagen;
+        });
+    });
+});
+</script>
 <script src="js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
