@@ -122,15 +122,15 @@
 
     <div>
         <footer class="bg-dark text-center text-white">
-            <div class="container p-4 pb-0">
-                <section class="mb-4">
+            <div class="container p-2 pb-0">
+                <section class="mb-2">
                 <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/KarollJC/TungTung" role="button"
                     ><i class="fab fa-github"></i
                 ></a>
                 </section>
             </div>
 
-            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            <div class="text-center p-2" style="background-color: rgba(0, 0, 0, 0.2);">
                 © 2025 TungTungcitos
             </div>
         </footer>

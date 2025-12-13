@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 
         <style>
@@ -88,7 +92,6 @@
     </style>
 </head>
 <?php
-session_start();
 $db_host = 'localhost';
 $db_user = 'root';
 $db_pass = '';
@@ -142,7 +145,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <div class="d-flex justify-content-end ms-lg-3 mt-3 mt-lg-0">
                     
-                    <p class="user-name me-3">Bienvenido, <?php echo $_SESSION["usuario"]; ?></p>
+                    <p class="user-name me-3">Bienvenido, <?php echo isset($_SESSION["usuario"]) ? $_SESSION["usuario"] : "Usuario"?> </p>
+                    
                         <button class="btn btn-light btn-login fw-bold">
                             <a href="login.php" class="text-danger">Login</a>
                         </button>
@@ -201,5 +205,22 @@ tecnologías HTML, CSS, Bootstrap, JavaScript y PHP.
             </div>
         </div>
     </div>
+
+    <div>
+        <footer class="bg-dark text-center text-white">
+            <div class="container p-2 pb-0">
+                <section class="mb-2">
+                <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/KarollJC/TungTung" role="button"
+                    ><i class="fab fa-github"></i
+                ></a>
+                </section>
+            </div>
+
+            <div class="text-center p-2" style="background-color: rgba(0, 0, 0, 0.2);">
+                © 2025 TungTungcitos
+            </div>
+        </footer>
+    </div>
+
 </body>
 </html>
