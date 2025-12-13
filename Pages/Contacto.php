@@ -7,9 +7,6 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/stylesContacto.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <style>
-        
-    </style>
 </head>
 <body class="d-flex flex-column">
 
@@ -30,7 +27,7 @@
                         <a href="Tipos_cascos.php">Tipos de Cascos</a>
                     </button>
                     <button class="btn btn-outline-light nav-btn mx-2 my-1">
-                        <a href="vista_Reglamento/reglamento.html">Reglamento</a>
+                        <a href="reglamento.html">Reglamento</a>
                     </button>
                     <button class="btn btn-outline-light nav-btn mx-2 my-1">
                         <a href="accidentes motocicleta/crud_accidentesmoto/accidentes.php">Accidentes</a>
@@ -131,7 +128,7 @@
             </div>
 
             <div class="text-center p-2" style="background-color: rgba(0, 0, 0, 0.2);">
-                © 2025 TungTungcitos
+                © 2025 ・ TungTungcitos ・ CBTis217
             </div>
         </footer>
     </div>

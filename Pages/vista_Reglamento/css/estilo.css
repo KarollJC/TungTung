@@ -1,3 +1,6 @@
+body{
+    background: linear-gradient(135deg, #000000, #3a0505);
+}
 #title{
     text-align: center;
 }
@@ -28,5 +31,74 @@ header{
 
 h1{
     background-color: brown;
+}
+.navbar-custom {
+            background-color: rgba(220, 53, 69, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        
+        .nav-btn {
+            transition: all 0.3s ease;
+            border-width: 2px;
+            font-weight: 500;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .content-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        .main-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn-login {
+            min-width: 100px;
+        }
+        
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2rem;
+            }
+            
+            .content-section {
+                padding: 1rem;
+            }
+            
+            .navbar-collapse {
+                padding: 1rem 0;
+            }
+            
+            .nav-btn {
+                width: 100%;
+                margin-bottom: 0.5rem;
+                text-align: left;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .main-title {
+                font-size: 1.8rem;
+            }
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        a:hover {
+            color: inherit;
+        }
+.navbar button {
+    width: auto !important;
 }
 
