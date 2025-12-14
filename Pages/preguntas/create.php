@@ -1,4 +1,5 @@
 <?php
+include("../../Libs/tungtungcrud.php");
 session_start();
 $login_required = true;
 $is_admin = false;
@@ -12,18 +13,99 @@ if(isset($_SESSION["logged"]))
         $is_admin = true;
     }
 }
+
+$message = "";
+$message_type = "";
+if (isset($_POST['subir'])) {
+    $pregunta = $_POST['pregunta'];
+    $categoria = $_POST['categoria'];
+    $orden = $_POST['orden'];
+    if($username == "") $username = "unregistered";
+
+    $db_conn = new Database("localhost","tungtung","tuntungcitos","1234"); //<-Los demas
+    //$db_conn = new Database("db","tungtung","tungtungcitos","1234"); //<- Angel
+    $conn = $db_conn->connect_db();
+
+    $sql = new CRUD($conn, 'preguntas_frecuentes');
+
+    $pregunta_sql = [
+        'pregunta' => $pregunta ?? '',
+        'usuario' => $username ?? '',
+        'categoria' => $categoria ?? '',
+        'orden' => $orden ?? '',
+        'respuesta' => "" ?? ''
+    ];
+
+        
+    $query = $sql->create($pregunta_sql);
+    if ($query) {
+        $message = "Pregunta agregada exitosamente";
+        $message_type = 'success';
+    } else {
+        $message = "Error al crear pregunta: " . $sql->getLastError();
+        $message_type = 'error';
+    }
+
+    $db_conn->close_connection();
+}
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <title>Agregar Pregunta</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="css/general_style.css">
-    <link rel="stylesheet" href="css/stylesNav.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/general_style.css">
+    <link rel="stylesheet" href="../css/stylesNav.css">
+    <style>
+        h2{
+            font-size: clamp(22px, 4vw, 32px);
+        }
+
+        .card-form{
+            background-color:#330000;
+            color:white;
+            border:none;
+            padding:25px;
+            border-radius:10px;
+        }
+
+        .form-control{
+            font-size: clamp(14px, 2.5vw, 18px);
+        }
+
+        label{
+            font-size: clamp(14px, 2.5vw, 18px);
+        }
+
+        .btn-guardar{
+            background-color:#990000;
+            color:white;
+            font-size: clamp(14px, 3vw, 18px);
+        }
+        .btn-guardar:hover{
+            background-color:#cc0000;
+        }
+
+        .btn-volver{
+            background-color:#555;
+            color:white;
+            font-size: clamp(14px, 3vw, 18px);
+        }
+        .btn-volver:hover{
+            background-color:#777;
+        }
+
+        @media (max-width: 768px){
+            .card-form{
+                padding:20px;
+            }
+        }
+    </style>
 </head>
+
 <body class="text-white">
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top">
         <div class="container">
@@ -107,55 +189,33 @@ if(isset($_SESSION["logged"]))
         </div>
     </nav>
 
-    <div class="container-fluid content-section">
-        <div class="row justify-content-center">
-            <div class="col-12 col-lg-10 col-xl-8">
-                <h1 class="main-title text-danger text-center mb-5">
-                    Seguridad Vial para Motociclistas
-                </h1>
-                <div class="row g-4">
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="card card-custom h-100 p-4">
-                            <h3 class="text-danger mb-3">Presentación</h3>
-                            <p class="text-light mb-0">
-                                Sitio web informativo sobre seguridad vial para motociclistas.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="card card-custom h-100 p-4">
-                            <h3 class="text-danger mb-3">Objetivo</h3>
-                            <p class="text-light mb-0">
-                                El alumno programará módulos web informativos y
-administrativos que promuevan prácticas seguras de
-conducción, integrando frontend y backend mediante
-tecnologías HTML, CSS, Bootstrap, JavaScript y PHP.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-12 col-lg-4">
-                        <div class="card card-custom h-100 p-4">
-                            <h3 class="text-danger mb-3">Mensaje Principal</h3>
-                            <div class="alert alert-danger border-0 m-0">
-                                <strong>Tu seguridad es lo más importante.</strong> Usa siempre casco certificado.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-5">
-                    <div class="col-12">
-                        <div class="card card-custom p-4">
-                            <h4 class="text-danger mb-3">Más información</h4>
-                            <p class="text-light lead">
-                                Este sitio busca reducir accidentes mediante la educación y concientización 
-                                sobre las mejores prácticas de seguridad para motociclistas.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<div class="container mt-4 py-4" style="max-width:600px;">
+    <div class="card card-form mx-auto">
+        <h2 class="text-center mb-3">Agregar Pregunta</h2>
+
+        <form method="POST">
+            <label>Pregunta:</label>
+            <input type="text" name="pregunta" class="form-control mb-3" required>
+
+            <label>Categoría:</label>
+            <input type="text" name="categoria" class="form-control mb-3" required>
+
+            <label>Orden:</label>
+            <input type="number" name="orden" class="form-control mb-3" required>
+
+            <button type="submit" name="subir" class="btn btn-guardar w-100">Guardar</button>
+            <a href="../preguntas_frec.php" class="btn btn-volver w-100 mt-2">Volver</a>
+        </form>
+        <?php 
+            echo "<p class='";
+            if($message_type=="success")
+                { echo "text-success "; }
+            else if($message_type=="error")
+                { echo "text-danger "; }
+            echo "text-center'>$message</p>";
+        ?>
     </div>
+</div>
 
     <footer class="bg-dark text-center text-white">
         <div class="container p-2 pb-0">
