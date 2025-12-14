@@ -1,22 +1,13 @@
-.login{
-    color: white;
+.login {
+    color: #fff;
 }
+
 .login h2 {
     margin-bottom: 1.5rem;
     color: #333;
     text-align: center;
 }
-button{
-    width: 100%;
-    padding: 10px;
-    margin-top: 1rem;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background 0.3s;
-}
+
 #formContainer {
     max-width: 100%;
 }

@@ -1,58 +1,97 @@
+<?php
+session_start();
+$login_required = true;
+$username = "";
+
+if(isset($_SESSION["logged"]))
+{
+    $login_required = false;
+    $username = $_SESSION["username"] ?? "Usuario";
+}
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contacto</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/stylesContacto.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="css/general_style.css">
+    <link rel="stylesheet" href="css/stylesNav.css">
+    <link rel="stylesheet" href="css/stylesContacto.css">
 </head>
 <body class="d-flex flex-column">
-
-    <nav class="navbar navbar-expand-lg navbar-custom py-3">
-        <div class="container-fluid">
-            <a class="navbar-brand text-white fw-bold d-none d-md-block" href="inicio.php">
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="inicio.php">
                 Seguridad Vial
             </a>
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
-                <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false">
+                <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarContent">
-                <div class="navbar-nav mx-auto justify-content-center flex-wrap">
-                    <button class="btn btn-outline-light nav-btn mx-2 my-1">
-                        <a href="Practicas_seguras/Practicas seguras/codigo.html">Prácticas seguras</a>
-                    </button>
-                    <button class="btn btn-outline-light nav-btn mx-2 my-1">
-                        <a href="Tipos_cascos.php">Tipos de Cascos</a>
-                    </button>
-                    <button class="btn btn-outline-light nav-btn mx-2 my-1">
-                        <a href="reglamento.html">Reglamento</a>
-                    </button>
-                    <button class="btn btn-outline-light nav-btn mx-2 my-1">
-                        <a href="accidentes motocicleta/crud_accidentesmoto/accidentes.php">Accidentes</a>
-                    </button>
-                    <button class="btn btn-outline-light nav-btn mx-2 my-1">
-                        <a href="preguntas_frecuentes/crud_preguntas/preguntas_frec.php">Preguntas Frecuentes</a>
-                    </button>
-                    <button class="btn btn-light nav-btn mx-2 my-1">
-                        <a href="Contacto.php">Contacto</a>
-                    </button>
-                </div>
-                <div class="d-flex justify-content-end ms-lg-3 mt-3 mt-lg-0">
-                    
-                        <button class="btn btn-light btn-login fw-bold">
-                            <a href="login.php" class="text-danger">Login</a>
-                        </button>
-                
-                </div>
-
+          
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light nav-btn mx-2 my-1"
+                        href="Practicas_seguras/Practicas seguras/codigo.html">
+                        Prácticas seguras
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light nav-btn mx-2 my-1"
+                        href="Tipos_cascos.php">
+                        Tipos de Cascos
+                        </a>
+                    </li>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light nav-btn mx-2 my-1"
+                        href="reglamento.php">
+                        Reglamento
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light nav-btn mx-2 my-1"
+                        href="accidentes motocicleta/crud_accidentesmoto/accidentes.php">
+                        Accidentes
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light nav-btn mx-2 my-1"
+                        href="preguntas_frecuentes/crud_preguntas/preguntas_frec.php">
+                        FAQ
+                        </a>
+                    </li>
+                    <?php
+                    if($login_required)
+                    {
+                        echo "
+                    <li class='nav-item'>
+                        <a class='btn btn-outline-light nav-btn mx-2 my-1'
+                        href='login.php'> Iniciar Sesión</a>
+                    </li>";
+                    }
+                    else
+                    {
+                        echo "
+                    <li class='nav-item dropdown'>
+                        <a class='dropdown-toggle btn btn-outline-light nav-btn mx-2 my-1' id='navbarDropdown' role='button' data-bs-toggle='dropdown' aria-expanded='false'>$username</a>
+                        <ul class='dropdown-menu' aria-labelledby='navbarDropdown'>
+                        <li>
+                            <a class='dropdown-item' href='logout.php'>Cerrar Sesión</a>
+                        </li>
+                        </ul>
+                    </li>";
+                    }
+                    ?>
+                </ul>
             </div>
         </div>
     </nav>
 
     <div class="card card-desktop w-100 w-md-75 mt-3 mx-auto">
-
         <img src="img/Compromiso.jpg" class="card-img-top">
         <div class="card-body">
             <h4 class="card-title text-center">Compromiso de Conducción Segura</h4><br>
@@ -117,22 +156,20 @@
         </div>
     </section>
 
-    <div>
-        <footer class="bg-dark text-center text-white">
-            <div class="container p-2 pb-0">
-                <section class="mb-2">
-                <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/KarollJC/TungTung" role="button"
-                    ><i class="fab fa-github"></i
-                ></a>
-                </section>
-            </div>
+    <footer class="bg-dark text-center text-white">
+        <div class="container p-2 pb-0">
+            <section class="mb-2">
+            <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/KarollJC/TungTung" role="button"
+                ><i class="fab fa-github"></i
+            ></a>
+            </section>
+            <a style="color: white;" href="Contacto.php"><u>Contacto</u></a>
+        </div>
 
-            <div class="text-center p-2" style="background-color: rgba(0, 0, 0, 0.2);">
-                © 2025 ・ TungTungcitos ・ CBTis217
-            </div>
-        </footer>
-    </div>
-
+        <div class="text-center p-2" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2025 TungTungcitos
+        </div>
+    </footer>
     <script src="js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -1,0 +1,10 @@
+:root {
+    --text-main-color: #fff;
+    --soft-text: #444444;
+    --link-color: #28c2e1ff;
+}
+
+body {
+    background: linear-gradient(135deg, #000000, #3a0505);
+    min-height: 100vh;
+}
