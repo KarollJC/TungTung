@@ -1,30 +1,46 @@
 <?php
-include("db.php");
+include("../Libs/tungtungcrud.php");
 session_start();
 $login_required = true;
+$is_admin = false;
 $username = "";
+
+$message = "";
+if(isset($_SESSION["delete_err"]))
+{
+    $message = $_SESSION["delete_err"];
+    unset($_SESSION["delete_err"]);
+}
 
 if(isset($_SESSION["logged"]))
 {
     $login_required = false;
     $username = $_SESSION["username"] ?? "Usuario";
+    if(isset($_SESSION["is_admin"]) && $_SESSION["is_admin"])
+    {
+        $is_admin = true;
+    }
 }
+$db_conn = new Database("localhost","tungtung","tuntungcitos","1234"); //<-Los demas
+//$db_conn = new Database("db","tungtung","tungtungcitos","1234"); //<- David
+$conn = $db_conn->connect_db();
+$sql = new CRUD($conn, 'preguntas_frecuentes');
+$query = $sql->read(null, [], 'orden ASC');
+
+$db_conn->close_connection();
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Preguntas Frecuentes</title>
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../css/stylesNav.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="css/general_style.css">
+    <link rel="stylesheet" href="css/stylesNav.css">
     <style>
-        body{
-            background: linear-gradient(135deg, #000000, #3a0505);
-        }
-
         h1{
             font-size: clamp(24px, 4vw, 36px);
         }
@@ -104,12 +120,12 @@ if(isset($_SESSION["logged"]))
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
+          
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <a class="btn btn-outline-light nav-btn mx-2 my-1"
-                        href="Practicas_seguras/Practicas seguras/codigo.html">
+                        href="codigo.php">
                         Prácticas seguras
                         </a>
                     </li>
@@ -122,19 +138,19 @@ if(isset($_SESSION["logged"]))
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-outline-light nav-btn mx-2 my-1"
-                        href="vista_Reglamento/reglamento.html">
+                        href="reglamento.php">
                         Reglamento
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-outline-light nav-btn mx-2 my-1"
-                        href="accidentes motocicleta/crud_accidentesmoto/accidentes.php">
+                        href="accidentes.php">
                         Accidentes
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-outline-light nav-btn mx-2 my-1"
-                        href="preguntas_frecuentes/crud_preguntas/preguntas_frec.php">
+                        href="preguntas_frec.php">
                         FAQ
                         </a>
                     </li>
@@ -143,23 +159,33 @@ if(isset($_SESSION["logged"]))
                     {
                         echo "
                     <li class='nav-item'>
-                    <button class=btn btn-outline-light nav-btn mx-2 my-1>
-                        <a class='nav-link' href='login.php' style='color: white;'>Iniciar Sesión</a>
-                    </button>
+                        <a class='btn btn-outline-light nav-btn mx-2 my-1'
+                        href='login.php'> Iniciar Sesión</a>
                     </li>";
                     }
                     else
                     {
                         echo "
                     <li class='nav-item dropdown'>
-                    <button class=btn btn-outline-light nav-btn mx-2 my-1>
-                        <a style='color: white;' class='nav-link dropdown-toggle' id='navbarDropdown' role='button' data-bs-toggle='dropdown' aria-expanded='false'>$username</a>
-                        <ul class='dropdown-menu' aria-labelledby='navbarDropdown'>
+                    <a class='dropdown-toggle btn btn-outline-light nav-btn mx-2 my-1' id='navbarDropdown' role='button' data-bs-toggle='dropdown' aria-expanded='false'>";
+                    if($is_admin)
+                    {
+                        echo 
+                        "<i class='fas fa-server' style='color: var(--secondary-color);'></i>";
+                    }
+                    else
+                    {
+                        echo
+                        "<i class='fas fa-user' style='color: var(--secondary-color);'></i>";
+                    }
+                    echo "
+                        $username
+                    </a>
+                    <ul class='dropdown-menu' aria-labelledby='navbarDropdown'>
                         <li>
                             <a class='dropdown-item' href='logout.php'>Cerrar Sesión</a>
                         </li>
-                        </ul>
-                    </button>
+                    </ul>
                     </li>";
                     }
                     ?>
@@ -172,26 +198,26 @@ if(isset($_SESSION["logged"]))
         <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
             <h1 class="text-white">Preguntas Frecuentes</h1>
 
-            <a href="create.php" class="btn btn-add mt-2 mt-md-0">Agregar pregunta</a>
+            <?= "<p class='text-danger text-center'>$message</p>"; ?>
+
+            <a href="preguntas/create.php" class="btn btn-add mt-2 mt-md-0">Agregar pregunta</a>
         </div>
         <div class="accordion" id="faqLista">
             <br>
             <?php
-            $sql = "SELECT * FROM preguntas_frecuentes ORDER BY orden ASC";
-            $resultado = $conexion->query($sql);
-
-            if($resultado->num_rows > 0)
+            if (is_array($query) && count($query) > 0)
             {
-                while ($fila = $resultado->fetch_assoc()) {
-                    $id = $fila['id_pregunta'];
-                    $pregunta = $fila['pregunta'];
-                    $respuesta = $fila['respuesta'];
-
+                foreach($query as $question)
+                {
+                    $id = htmlspecialchars($question['id_pregunta']);
+                    $pregunta = htmlspecialchars($question['pregunta']);
+                    $usuario = htmlspecialchars($question['usuario']);
+                    $respuesta = htmlspecialchars($question['respuesta']);
                     echo '
                     <div class="accordion-item faq-card mb-2">
                         <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#item'.$id.'">
-                                '.$pregunta.'
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#item'.$id.'">'
+                            ."$usuario - $pregunta".'
                             </button>
                         </h2>
 
@@ -200,8 +226,8 @@ if(isset($_SESSION["logged"]))
                                 '.$respuesta.'
 
                                 <div class="mt-3 d-flex flex-wrap gap-2 faq-actions">
-                                    <a href="update.php?id='.$id.'" class="btn btn-editar btn-sm">Editar / Responder</a>
-                                    <a href="delete.php?id='.$id.'" class="btn btn-eliminar btn-sm">Eliminar</a>
+                                    <a href="preguntas/update.php?id='.$id.'" class="btn btn-editar btn-sm">Editar / Responder</a>
+                                    <a href="preguntas/delete.php?id='.$id.'" class="btn btn-eliminar btn-sm">Eliminar</a>
                                 </div>
                             </div>
                         </div>
@@ -215,6 +241,21 @@ if(isset($_SESSION["logged"]))
             ?>
         </div>
     </div>
-    <script src="../../js/bootstrap.bundle.min.js"></script>
+
+    <footer class="bg-dark text-center text-white">
+        <div class="container p-2 pb-0">
+            <section class="mb-2">
+            <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/KarollJC/TungTung" role="button"
+                ><i class="fab fa-github"></i
+            ></a>
+            </section>
+            <a style="color: white;" href="Contacto.php"><u>Contacto</u></a>
+        </div>
+
+        <div class="text-center p-2" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2025 TungTungcitos
+        </div>
+    </footer>
+    <script src="js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

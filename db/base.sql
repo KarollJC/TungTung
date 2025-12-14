@@ -17,6 +17,12 @@ contra varchar(20) not null,
 num_telefono varchar(12) not null
 );
 
+create table admins(
+id_admin int auto_increment primary key,
+user_id int not null,
+foreign key (user_id) references usuarios(id_usuario)
+);
+
 create table tipos_cascos(
 id_casco int auto_increment primary key,
 tipo varchar(50) not null,
@@ -52,6 +58,7 @@ nivel_gravedad varchar(40) not null
 create table preguntas_frecuentes(
 id_pregunta int auto_increment primary key,
 pregunta varchar(100) not null,
+usuario varchar(50) not null,
 respuesta varchar(120) not null,
 categoria varchar(50) not null,
 orden varchar(40) not null

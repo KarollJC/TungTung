@@ -94,7 +94,7 @@ function get_image_path($index)
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <a class="btn btn-outline-light nav-btn mx-2 my-1"
-                        href="Practicas_seguras/Practicas seguras/codigo.html">
+                        href="codigo.php">
                         Prácticas seguras
                         </a>
                     </li>
@@ -113,13 +113,13 @@ function get_image_path($index)
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-outline-light nav-btn mx-2 my-1"
-                        href="accidentes motocicleta/crud_accidentesmoto/accidentes.php">
+                        href="accidentes.php">
                         Accidentes
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-outline-light nav-btn mx-2 my-1"
-                        href="preguntas_frecuentes/crud_preguntas/preguntas_frec.php">
+                        href="preguntas_frec.php">
                         FAQ
                         </a>
                     </li>
@@ -136,12 +136,23 @@ function get_image_path($index)
                     {
                         echo "
                     <li class='nav-item dropdown'>
-                        <a class='dropdown-toggle btn btn-outline-light nav-btn mx-2 my-1' id='navbarDropdown' role='button' data-bs-toggle='dropdown' aria-expanded='false'>$username</a>
-                        <ul class='dropdown-menu' aria-labelledby='navbarDropdown'>
+                    <a class='dropdown-toggle btn btn-outline-light nav-btn mx-2 my-1' id='navbarDropdown' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
+                    <i class='fas fa-user' style='color: var(--secondary-color);'></i>
+                        $username
+                    </a>
+                    <ul class='dropdown-menu' aria-labelledby='navbarDropdown'>
+                    ";
+                    if($is_admin)
+                    {
+                        echo
+                        "<li><a class='dropdown-item' href='admin.php'>Admin</a></li>
+                        </li>";
+                    }
+                    echo "
                         <li>
                             <a class='dropdown-item' href='logout.php'>Cerrar Sesión</a>
                         </li>
-                        </ul>
+                    </ul>
                     </li>";
                     }
                     ?>
