@@ -1,6 +1,12 @@
 <?php
-    $mensaje_ok = isset($_GET['ok']);
-    $mensaje_error = isset($_GET['error']);
+session_start();
+$mensaje_ok = isset($_GET['ok']);
+$mensaje_error = isset($_GET['error']);
+if(isset($_SESSION["logged"]))
+{
+    header("Location: inicio.php");
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,19 +14,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
-<<<<<<< HEAD:Registro/Registro.php
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="css/general_style.css">
+    <link rel="stylesheet" href="css/stylesNav.css">
     <link rel="stylesheet" href="css/stylesRegistro.css">
-=======
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
->>>>>>> 2d550785468839cd98a201412d88705e50d3dcba:Pages/Registro.php
-    <style>
-        body{
-            background: linear-gradient(135deg, #000000, #3a0505);
-        }
-    </style>
 </head>
-<body class="text-black">
+<body class="text-black body">
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="inicio.php">
+                Seguridad Vial
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light nav-btn mx-2 my-1"
+                        href="Practicas_seguras/Practicas seguras/codigo.html">
+                        Prácticas seguras
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light nav-btn mx-2 my-1"
+                        href="Tipos_cascos.php">
+                        Tipos de Cascos
+                        </a>
+                    </li>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light nav-btn mx-2 my-1"
+                        href="reglamento.php">
+                        Reglamento
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light nav-btn mx-2 my-1"
+                        href="accidentes motocicleta/crud_accidentesmoto/accidentes.php">
+                        Accidentes
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light nav-btn mx-2 my-1"
+                        href="preguntas_frecuentes/crud_preguntas/preguntas_frec.php">
+                        FAQ
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light nav-btn mx-2 my-1"
+                        href="login.php">Iniciar Sesión</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
     <section class="d-flex justify-content-center align-items-center min-vh-100">
         <div class="login p-4 w-100" id="formContainer">
 
@@ -77,16 +128,29 @@
                 <button type="submit" class="btn btn-danger">Continuar</button>
 
                 <br><br>
-                <p class="text-center">¿Ya tienes una cuenta?</p>
-                <p class="text-center">
-                    <a href="login.php" class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
-                        Iniciar sesión
+                <p class="text-center">¿Ya tienes una cuenta?
+                    <a href="login.php" style="color: var(--link-color);" class="link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"> 
+                        <u>Iniciar sesión</u>
                     </a>
                 </p>
             </form>
         </div>
     </section>
 
+     <footer class="bg-dark text-center text-white">
+        <div class="container p-2 pb-0">
+            <section class="mb-2">
+            <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/KarollJC/TungTung" role="button"
+                ><i class="fab fa-github"></i
+            ></a>
+            </section>
+            <a style="color: white;" href="Contacto.php"><u>Contacto</u></a>
+        </div>
+
+        <div class="text-center p-2" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2025 TungTungcitos
+        </div>
+    </footer>
     <script src="js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

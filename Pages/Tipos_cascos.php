@@ -1,12 +1,22 @@
 <?php
 require_once '../Libs/tungtungcrud.php';
 
+session_start();
+$login_required = true;
+$username = "";
+
+if(isset($_SESSION["logged"]))
+{
+    $login_required = false;
+    $username = $_SESSION["username"] ?? "Usuario";
+}
+
 const MAX_CASCOS = 7;
 $mensaje = "";
 $informacion_cascos = [];
 
 //$db = new Database('localhost', 'tungtung', 'root', '');
-$db = new Database('db', 'tungtung', 'angel', '1234');
+$db = new Database('db', 'tungtung', 'tungtungcitos', '1234');
 $conexion = $db->connect_db();
 
 $crud = new CRUD($conexion, 'tipos_cascos');
@@ -59,21 +69,87 @@ function get_image_path($index)
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tipos de Cascos</title>
+    <title>Inicio</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="css/general_style.css">
+    <link rel="stylesheet" href="css/stylesNav.css">
     <style>
-        body {
-            background: linear-gradient(135deg, #000000, #3a0505);
-            min-height: 100vh;
-            color: white;
-        }
         .carousel-item img {
             height: 380px;
         }
     </style>
 </head>
-<body>
-<div class="container py-5">
+<body class="text-white">
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="inicio.php">
+                Seguridad Vial
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light nav-btn mx-2 my-1"
+                        href="Practicas_seguras/Practicas seguras/codigo.html">
+                        Prácticas seguras
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light nav-btn mx-2 my-1"
+                        href="Tipos_cascos.php">
+                        Tipos de Cascos
+                        </a>
+                    </li>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light nav-btn mx-2 my-1"
+                        href="reglamento.php">
+                        Reglamento
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light nav-btn mx-2 my-1"
+                        href="accidentes motocicleta/crud_accidentesmoto/accidentes.php">
+                        Accidentes
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light nav-btn mx-2 my-1"
+                        href="preguntas_frecuentes/crud_preguntas/preguntas_frec.php">
+                        FAQ
+                        </a>
+                    </li>
+                    <?php
+                    if($login_required)
+                    {
+                        echo "
+                    <li class='nav-item'>
+                        <a class='btn btn-outline-light nav-btn mx-2 my-1'
+                        href='login.php'> Iniciar Sesión</a>
+                    </li>";
+                    }
+                    else
+                    {
+                        echo "
+                    <li class='nav-item dropdown'>
+                        <a class='dropdown-toggle btn btn-outline-light nav-btn mx-2 my-1' id='navbarDropdown' role='button' data-bs-toggle='dropdown' aria-expanded='false'>$username</a>
+                        <ul class='dropdown-menu' aria-labelledby='navbarDropdown'>
+                        <li>
+                            <a class='dropdown-item' href='logout.php'>Cerrar Sesión</a>
+                        </li>
+                        </ul>
+                    </li>";
+                    }
+                    ?>
+                </ul>
+            </div>
+        </div>
+    </nav>
+        
     <h1 class="text-center mb-4 fw-bold">Tipos de Cascos en Motocicletas</h1>
     <h6 class="text-center mb-4 fw-bold" style="color: #ff0000;"><?= $mensaje ?></h6>
 

@@ -168,41 +168,49 @@ if(isset($_SESSION["logged"]))
         </div>
     </nav>
 
-    <div class="container mt-3" style="max-width:900px;">
+    <div class="container mt-3 py-3" style="max-width:900px;">
         <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
             <h1 class="text-white">Preguntas Frecuentes</h1>
 
             <a href="create.php" class="btn btn-add mt-2 mt-md-0">Agregar pregunta</a>
         </div>
         <div class="accordion" id="faqLista">
+            <br>
             <?php
             $sql = "SELECT * FROM preguntas_frecuentes ORDER BY orden ASC";
             $resultado = $conexion->query($sql);
 
-            while ($fila = $resultado->fetch_assoc()) {
-                $id = $fila['id_pregunta'];
-                $pregunta = $fila['pregunta'];
-                $respuesta = $fila['respuesta'];
+            if($resultado->num_rows > 0)
+            {
+                while ($fila = $resultado->fetch_assoc()) {
+                    $id = $fila['id_pregunta'];
+                    $pregunta = $fila['pregunta'];
+                    $respuesta = $fila['respuesta'];
 
-                echo '
-                <div class="accordion-item faq-card mb-2">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#item'.$id.'">
-                            '.$pregunta.'
-                        </button>
-                    </h2>
+                    echo '
+                    <div class="accordion-item faq-card mb-2">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#item'.$id.'">
+                                '.$pregunta.'
+                            </button>
+                        </h2>
 
-                    <div id="item'.$id.'" class="accordion-collapse collapse">
-                        <div class="accordion-body">
-                            '.$respuesta.'
+                        <div id="item'.$id.'" class="accordion-collapse collapse">
+                            <div class="accordion-body">
+                                '.$respuesta.'
 
-                            <div class="mt-3 d-flex flex-wrap gap-2 faq-actions">
-                                <a href="update.php?id='.$id.'" class="btn btn-editar btn-sm">Editar / Responder</a>
-                                <a href="delete.php?id='.$id.'" class="btn btn-eliminar btn-sm">Eliminar</a>
+                                <div class="mt-3 d-flex flex-wrap gap-2 faq-actions">
+                                    <a href="update.php?id='.$id.'" class="btn btn-editar btn-sm">Editar / Responder</a>
+                                    <a href="delete.php?id='.$id.'" class="btn btn-eliminar btn-sm">Eliminar</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>';
+                    </div>';
+                }
+            }
+            else
+            {
+                echo "<h4 style='color: white;'>No hay preguntas todavía</h4>";
             }
             ?>
         </div>

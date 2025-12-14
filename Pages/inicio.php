@@ -2,7 +2,6 @@
 session_start();
 $login_required = true;
 $username = "";
-
 if(isset($_SESSION["logged"]))
 {
     $login_required = false;
@@ -15,8 +14,9 @@ if(isset($_SESSION["logged"]))
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="css/general_style.css">
     <link rel="stylesheet" href="css/stylesNav.css">
 </head>
 <body class="text-white">
@@ -46,7 +46,7 @@ if(isset($_SESSION["logged"]))
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-outline-light nav-btn mx-2 my-1"
-                        href="vista_Reglamento/reglamento.html">
+                        href="reglamento.php">
                         Reglamento
                         </a>
                     </li>
@@ -67,23 +67,20 @@ if(isset($_SESSION["logged"]))
                     {
                         echo "
                     <li class='nav-item'>
-                    <button class=btn btn-outline-light nav-btn mx-2 my-1>
-                        <a class='nav-link' href='login.php' style='color: white;'>Iniciar Sesión</a>
-                    </button>
+                        <a class='btn btn-outline-light nav-btn mx-2 my-1'
+                        href='login.php'> Iniciar Sesión</a>
                     </li>";
                     }
                     else
                     {
                         echo "
                     <li class='nav-item dropdown'>
-                    <button class=btn btn-outline-light nav-btn mx-2 my-1>
-                        <a style='color: white;' class='nav-link dropdown-toggle' id='navbarDropdown' role='button' data-bs-toggle='dropdown' aria-expanded='false'>$username</a>
+                        <a class='dropdown-toggle btn btn-outline-light nav-btn mx-2 my-1' id='navbarDropdown' role='button' data-bs-toggle='dropdown' aria-expanded='false'>$username</a>
                         <ul class='dropdown-menu' aria-labelledby='navbarDropdown'>
                         <li>
                             <a class='dropdown-item' href='logout.php'>Cerrar Sesión</a>
                         </li>
                         </ul>
-                    </button>
                     </li>";
                     }
                     ?>
@@ -92,7 +89,7 @@ if(isset($_SESSION["logged"]))
         </div>
     </nav>
 
-<div class="container-fluid content-section">
+    <div class="container-fluid content-section">
         <div class="row justify-content-center">
             <div class="col-12 col-lg-10 col-xl-8">
                 <h1 class="main-title text-danger text-center mb-5">
@@ -149,7 +146,7 @@ tecnologías HTML, CSS, Bootstrap, JavaScript y PHP.
                 ><i class="fab fa-github"></i
             ></a>
             </section>
-            <a style="color: white;" href="contacto.php">Contacto</a>
+            <a style="color: white;" href="Contacto.php"><u>Contacto</u></a>
         </div>
 
         <div class="text-center p-2" style="background-color: rgba(0, 0, 0, 0.2);">

@@ -1,41 +1,10 @@
 <?php
 session_start();
-
-$db_host = 'localhost';
-$db_user = 'root';
-$db_pass = '';
-$db_base = 'tungtung';
-$db_port = '3306';
-
-$conexion = mysqli_connect($db_host, $db_user, $db_pass, $db_base, $db_port);
-
-if ($conexion->connect_error) {
-    die("Error de conexión: " . $conexion->connect_error);
+if(isset($_SESSION["logged"]))
+{
+    header("Location: inicio.php");
+    exit();
 }
-
-$mensaje = "";
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $usuario = $_POST["usuario"];
-    $contra = $_POST["contra"];
-
-    $usuario = $conexion->real_escape_string($usuario);
-    $contra = $conexion->real_escape_string($contra);
-
-    $sql = "SELECT * FROM usuarios WHERE usuario = '$usuario' AND contra = '$contra'";
-    $resultado = $conexion->query($sql);
-
-    if ($resultado->num_rows > 0) {
-        $_SESSION["usuario"] = $usuario;
-        header("Location: inicio.php");
-        exit();
-    } 
-    else {
-        $mensaje = "Usuario o contraseña incorrectos";
-    }
-}
-
-$conexion->close();
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -43,14 +12,65 @@ $conexion->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Seguridad Vial</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body{
-            background: linear-gradient(135deg, #000000, #3a0505);
-        }
-    </style>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="css/general_style.css">
+    <link rel="stylesheet" href="css/stylesNav.css">
 </head>
-<body class="text-white">
+<body class="text-white body">
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="inicio.php">
+                Seguridad Vial
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light nav-btn mx-2 my-1"
+                        href="Practicas_seguras/Practicas seguras/codigo.html">
+                        Prácticas seguras
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light nav-btn mx-2 my-1"
+                        href="Tipos_cascos.php">
+                        Tipos de Cascos
+                        </a>
+                    </li>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light nav-btn mx-2 my-1"
+                        href="reglamento.php">
+                        Reglamento
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light nav-btn mx-2 my-1"
+                        href="accidentes motocicleta/crud_accidentesmoto/accidentes.php">
+                        Accidentes
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light nav-btn mx-2 my-1"
+                        href="preguntas_frecuentes/crud_preguntas/preguntas_frec.php">
+                        FAQ
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light nav-btn mx-2 my-1"
+                        href="Registro.php">
+                        Registrarse
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
 <section class="d-flex justify-content-center align-items-center min-vh-100 p-3">
     <div class="login-container">
         <h2 class="text-center mb-4 text-danger fw-bold">Iniciar Sesión</h2>
@@ -69,20 +89,27 @@ $conexion->close();
             <button class="btn btn-danger w-100 mt-3 fw-bold" type="submit">Ingresar</button>
         </form>
 
-        <?php if ($mensaje != ""): ?>
-            <div id="mensaje-error" class="mt-3">
-                <?= htmlspecialchars($mensaje) ?>
-            </div>
-        <?php endif; ?>
-        
         <div class="text-center mt-4">
-            <form action="Registro.php" method="GET">
-                <button type="submit" class="btn btn-link btn-register-link">
-                    ¿No tienes una cuenta? Regístrate aquí
-                </button>
-            </form>
+            <p type="submit">¿No tienes una cuenta?
+                <a style="color: var(--link-color);" href="Registro.php"><u> Regístrate aquí</u></a></p>
         </div>
     </div>
 </section>
+
+    <footer class="bg-dark text-center text-white">
+        <div class="container p-2 pb-0">
+            <section class="mb-2">
+            <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/KarollJC/TungTung" role="button"
+                ><i class="fab fa-github"></i
+            ></a>
+            </section>
+            <a style="color: white;" href="Contacto.php"><u>Contacto</u></a>
+        </div>
+
+        <div class="text-center p-2" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2025 TungTungcitos
+        </div>
+    </footer>
+    <script src="js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
