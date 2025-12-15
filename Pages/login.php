@@ -112,7 +112,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-outline-light nav-btn mx-2 my-1"
-                        href="preguntas_frecuentes/crud_preguntas/preguntas_frec.php">
+                        href="preguntas_frec.php">
                         FAQ
                         </a>
                     </li>
