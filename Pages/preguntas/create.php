@@ -22,7 +22,7 @@ if (isset($_POST['subir'])) {
     $orden = $_POST['orden'];
     if($username == "") $username = "unregistered";
 
-    $db_conn = new Database("localhost","tungtung","tuntungcitos","1234"); //<-Los demas
+    $db_conn = new Database("localhost","tungtung","tungtungcitos","1234"); //<-Los demas
     //$db_conn = new Database("db","tungtung","tungtungcitos","1234"); //<- Angel
     $conn = $db_conn->connect_db();
 

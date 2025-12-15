@@ -21,7 +21,7 @@ if(isset($_SESSION["logged"]))
         $is_admin = true;
     }
 }
-$db_conn = new Database("localhost","tungtung","tuntungcitos","1234"); //<-Los demas
+$db_conn = new Database("localhost","tungtung","tungtungcitos","1234"); //<-Los demas
 //$db_conn = new Database("db","tungtung","tungtungcitos","1234"); //<- David
 $conn = $db_conn->connect_db();
 $sql = new CRUD($conn, 'preguntas_frecuentes');
