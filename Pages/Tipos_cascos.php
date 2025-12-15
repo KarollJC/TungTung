@@ -87,6 +87,7 @@ function get_image_path($index)
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top">
         <div class="container">
             <a class="navbar-brand" href="inicio.php">
+                <img src="img/rino.png" height="50px" alt="">
                 Seguridad Vial
             </a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false">
@@ -102,7 +103,7 @@ function get_image_path($index)
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-outline-light nav-btn mx-2 my-1"
+                        <a class="btn btn-light nav-btn mx-2 my-1"
                         href="Tipos_cascos.php">
                         Tipos de Cascos
                         </a>

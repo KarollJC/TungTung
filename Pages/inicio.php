@@ -28,6 +28,7 @@ if(isset($_SESSION["logged"]))
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top">
         <div class="container">
             <a class="navbar-brand" href="inicio.php">
+                <img src="img/rino.png" height="50px" alt="">
                 Seguridad Vial
             </a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false">
@@ -72,8 +73,8 @@ if(isset($_SESSION["logged"]))
                     {
                         echo "
                     <li class='nav-item'>
-                        <a class='btn btn-outline-light nav-btn mx-2 my-1'
-                        href='login.php'> Iniciar Sesión</a>
+                            <a class='btn btn-outline-light nav-btn mx-2 my-1'
+                            href='login.php'> Iniciar Sesión</a>
                     </li>";
                     }
                     else
