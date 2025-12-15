@@ -38,7 +38,7 @@ if(isset($_SESSION["logged"]))
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <a class="btn btn-outline-light nav-btn mx-2 my-1"
-                        href="codigo.php">
+                        href="Practicas_seguras/Practicas seguras/codigo.html">
                         Prácticas seguras
                         </a>
                     </li>
@@ -57,7 +57,7 @@ if(isset($_SESSION["logged"]))
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-outline-light nav-btn mx-2 my-1"
-                        href="accidentes.php">
+                        href="accidentes motocicleta/crud_accidentesmoto/accidentes.php">
                         Accidentes
                         </a>
                     </li>

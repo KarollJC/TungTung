@@ -12,13 +12,13 @@ $query = $sql->delete('id_pregunta = ?', [$id]);
 
 if($query)
 {
-    header("Location: preguntas_frec.php");
+    header("Location: /TungTung/Pages/preguntas_frec.php");
     exit();
 }
 else
 {
     $_SESSION["delete_err"] = "Error al eliminar la pregunta con id: " . $id;
-    header("Location: ../preguntas_frec.php");
+    header("Location: /TungTung/Pages/preguntas_frec.php");
 }
 $db_conn->close_connection();
 ?>
