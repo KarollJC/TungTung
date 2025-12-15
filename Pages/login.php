@@ -1,9 +1,64 @@
 <?php
+include('../Libs/tungtungcrud.php');
 session_start();
 if(isset($_SESSION["logged"]))
 {
     header("Location: inicio.php");
     exit();
+}
+
+$logged = false;
+if($_SERVER["REQUEST_METHOD"] == "POST")
+{
+    $admin = false;
+    $username = isset($_POST["usuario"]) ? trim($_POST["usuario"]) : '';
+    $password = isset($_POST["contra"]) ? $_POST["contra"] : '';
+
+    $db_conn = new Database("localhost","tungtung","tuntungcitos","1234"); //<-Los demas
+    //$db_conn = new Database("db","tungtung","tungtungcitos","1234"); //<- David
+    $conn = $db_conn->connect_db();
+    $sql = new CRUD($conn, 'usuarios');
+    $query = $sql->read('usuario = ?', [$username], null, 1);
+
+    $stored = null;
+    $id = null;
+    $password_ok = false;
+    $admin = null;
+
+    if(!empty($query))
+    {
+        $stored = $query[0]['contra'];
+        $id = $query[0]['id_usuario'];
+
+        if($password === $stored)
+        {
+            $password_ok = true;
+            $logged = true;
+        }
+
+        if($logged)
+        {
+            $sql = new CRUD($conn, 'admins');
+            $query2 = $sql->read('user_id = ?', [$id], null, 1);
+
+            if(!empty($query2))
+            {
+                $admin = true;
+            }
+        }
+    }
+
+    $db_conn->close_connection();
+
+    if($logged)
+    {
+        $_SESSION['logged'] = true;
+        $_SESSION['username'] = $username;
+        if($admin) $_SESSION['is_admin'] = true;
+
+        header("Location: inicio.php");
+        exit();
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -78,18 +133,19 @@ if(isset($_SESSION["logged"]))
         <form method="POST" action="">
             <div class="mb-3">
                 <label class="form-label">Usuario</label>
-                <input type="text" name="usuario" placeholder="Ingresa tu usuario" required class="form-control">
+                <input type="text" name="usuario" id="usuario" placeholder="Ingresa tu usuario" required class="form-control">
             </div>
             
             <div class="mb-3">
                 <label class="form-label">Contraseña</label>
-                <input type="password" name="contra" placeholder="Ingresa tu contraseña" required class="form-control">
+                <input type="password" name="contra" id="contra" placeholder="Ingresa tu contraseña" required class="form-control">
             </div>
 
             <button class="btn btn-danger w-100 mt-3 fw-bold" type="submit">Ingresar</button>
         </form>
 
         <div class="text-center mt-4">
+            <?php if(!$logged) "Credenciales incorrectas" ?>
             <p type="submit">¿No tienes una cuenta?
                 <a style="color: var(--link-color);" href="Registro.php"><u> Regístrate aquí</u></a></p>
         </div>
