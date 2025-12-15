@@ -25,6 +25,7 @@ if(isset($_SESSION["logged"]))
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top">
         <div class="container">
             <a class="navbar-brand" href="inicio.php">
+                <img src="img/rino.png" height="50px" alt="">
                 Seguridad Vial
             </a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false">
@@ -47,7 +48,7 @@ if(isset($_SESSION["logged"]))
                     </li>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-outline-light nav-btn mx-2 my-1"
+                        <a class="btn btn-light nav-btn mx-2 my-1"
                         href="reglamento.php">
                         Reglamento
                         </a>
@@ -243,20 +244,19 @@ if(isset($_SESSION["logged"]))
 
 </div>  
 
-    <div>
-        <footer class="bg-dark text-center text-white">
-            <div class="container p-2 pb-0">
-                <section class="mb-2">
-                <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/KarollJC/TungTung" role="button"
-                    ><i class="fab fa-github"></i
-                ></a>
-                </section>
-            </div>
+    <footer class="bg-dark text-center text-white">
+        <div class="container p-2 pb-0">
+            <section class="mb-2">
+            <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/KarollJC/TungTung" role="button"
+                ><i class="fab fa-github"></i
+            ></a>
+            </section>
+            <a style="color: white;" href="Contacto.php"><u>Contacto</u></a>
+        </div>
 
-            <div class="text-center p-2" style="background-color: rgba(0, 0, 0, 0.2);">
-                © 2025 ・ TungTungcitos ・ CBTis217
-            </div>
-        </footer>
-    </div>
+        <div class="text-center p-2" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2025 TungTungcitos
+        </div>
+    </footer>
 </body>
 </html>
