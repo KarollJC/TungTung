@@ -150,7 +150,7 @@ $db_conn->close_connection();
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-outline-light nav-btn mx-2 my-1"
-                        href="preguntas_frec.php">
+                        href="../preguntas_frec.php">
                         FAQ
                         </a>
                     </li>
