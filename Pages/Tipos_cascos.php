@@ -1,22 +1,25 @@
 <?php
 require_once '../Libs/tungtungcrud.php';
-
 session_start();
 $login_required = true;
+$is_admin = false;
 $username = "";
-
 if(isset($_SESSION["logged"]))
 {
     $login_required = false;
     $username = $_SESSION["username"] ?? "Usuario";
+    if(isset($_SESSION["is_admin"]) && $_SESSION["is_admin"])
+    {
+        $is_admin = true;
+    }
 }
 
 const MAX_CASCOS = 7;
 $mensaje = "";
 $informacion_cascos = [];
 
-//$db = new Database('localhost', 'tungtung', 'root', '');
-$db = new Database('db', 'tungtung', 'tungtungcitos', '1234');
+$db = new Database('localhost', 'tungtung', 'root', '');
+//$db = new Database('db', 'tungtung', 'tungtungcitos', '1234');
 $conexion = $db->connect_db();
 
 $crud = new CRUD($conexion, 'tipos_cascos');
