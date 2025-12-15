@@ -3,7 +3,7 @@ session_start();
 include("../../Libs/tungtungcrud.php");
 $id = $_GET['id'];
 
-$db_conn = new Database("localhost","tungtung","tuntungcitos","1234"); //<-Los demas
+$db_conn = new Database("localhost","tungtung","tungtungcitos","1234"); //<-Los demas
 //$db_conn = new Database("db","tungtung","tungtungcitos","1234"); //<- David
 $conn = $db_conn->connect_db();
 $sql = new CRUD($conn, 'preguntas_frecuentes');

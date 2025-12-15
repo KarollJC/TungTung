@@ -14,7 +14,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     $username = isset($_POST["usuario"]) ? trim($_POST["usuario"]) : '';
     $password = isset($_POST["contra"]) ? $_POST["contra"] : '';
 
-    $db_conn = new Database("localhost","tungtung","tuntungcitos","1234"); //<-Los demas
+    $db_conn = new Database("localhost","tungtung","tungtungcitos","1234"); //<-Los demas
     //$db_conn = new Database("db","tungtung","tungtungcitos","1234"); //<- David
     $conn = $db_conn->connect_db();
     $sql = new CRUD($conn, 'usuarios');
