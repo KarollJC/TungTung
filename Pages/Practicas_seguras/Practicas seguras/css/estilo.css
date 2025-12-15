@@ -11,4 +11,11 @@
 header{
     color: brown;
     background-color: brown;
+    height: 80px; /* Establece una altura fija para el header */
+
+}
+
+img{
+    width: 60px;
+    height: auto;
 }
