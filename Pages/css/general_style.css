@@ -1,30 +1,26 @@
 :root {
     --text-main-color: #fff;
     --soft-text: #444444;
-    --footer-bg: rgba(0, 0, 0, 0.2);
     --link-color: #28c2e1ff;
 }
 
 body {
-    background: linear-gradient(135deg, #000000, #3a0505);
+    background: rgb(33, 33, 33);
     min-height: 100vh;
 }
-
-h1 {
+h1{
     font-size: 40px;
     font-family: 'Montserrat', sans-serif;
     font-weight: 800;
 }
-
-.fecha {
+.fecha{
     border-radius: 15px;
     border: 2px solid rgb(136, 136, 136);
     color: rgb(204, 204, 204);
     width: 180px;
     padding: 3px;
 }
-
-#header {
+#header{
     background-image: url("../img/banner.png");
     padding: 20px;
     height: 450px;
@@ -34,22 +30,19 @@ h1 {
     display: flex;
     align-items: center; 
 }
-
-#principal {
+#principal{
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
-
-.textBanner {
+.textBanner{
     font-size: 2px;
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;
     color: white;
     font-size: 18px;
 }
-
-#header::after  {
+#header::after {
     content: "";
     position: absolute;
     bottom: 0;
