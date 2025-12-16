@@ -109,7 +109,7 @@ function get_image_path($index)
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-outline-light nav-btn mx-2 my-1"
+                        <a class="btn btn-light nav-btn mx-2 my-1"
                         href="Tipos_cascos.php">
                         Tipos de Cascos
                         </a>
