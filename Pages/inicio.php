@@ -25,6 +25,7 @@ if(isset($_SESSION["logged"]))
     <link rel="stylesheet" href="css/stylesNav.css">
 </head>
 <body class="text-white">
+    <div id="principal">
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top">
         <div class="container">
             <a class="navbar-brand" href="inicio.php">
@@ -108,12 +109,32 @@ if(isset($_SESSION["logged"]))
         </div>
     </nav>
 
+    <header id="header">
+        <div id="bannerCont">
+            <h1 class="card-title text-danger">Seguridad Vial para Motociclistas</h1><br>
+            <p class="textBanner">Identifica cuales son las practicas correctas para una <br> conducción segura a la hora de manejar motocicleta.</p><br>
+            <div class="d-flex align-items-center gap-3 mt-3">
+                <p class="fecha mb-0">Publicación 16 Dic 2025</p>
+                <div class="dropdown">
+                    <button class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Autores
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Barrientos Vital Ángel David</a></li>
+                        <li><a class="dropdown-item" href="#">Ferreyra Guzmán Ámerica Janeth</a></li>
+                        <li><a class="dropdown-item" href="#">Gordillo Aguilar Leonardo</a></li>
+                        <li><a class="dropdown-item" href="#">Juárez Cuevas Karol</a></li>
+                        <li><a class="dropdown-item" href="#">Moreno Domínguez Víctor Hugo</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
     <div class="container-fluid content-section">
         <div class="row justify-content-center">
             <div class="col-12 col-lg-10 col-xl-8">
-                <h1 class="main-title text-danger text-center mb-5">
-                    Seguridad Vial para Motociclistas
-                </h1>
                 <div class="row g-4">
                     <div class="col-12 col-md-6 col-lg-4">
                         <div class="card card-custom h-100 p-4">
@@ -172,6 +193,7 @@ tecnologías HTML, CSS, Bootstrap, JavaScript y PHP.
             © 2025 TungTungcitos
         </div>
     </footer>
+    </div>
     <script src="js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
