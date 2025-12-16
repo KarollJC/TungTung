@@ -87,7 +87,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <a class="btn btn-outline-light nav-btn mx-2 my-1"
-                        href="Practicas_seguras/Practicas seguras/codigo.html">
+                        href="/TungTung/Pages/Practicas_Seguras/Practicas seguras/codigo.php">
                         Prácticas seguras
                         </a>
                     </li>

@@ -126,7 +126,7 @@ $db_conn->close_connection();
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <a class="btn btn-outline-light nav-btn mx-2 my-1"
-                        href="codigo.php">
+                        href="/TungTung/Pages/Practicas_Seguras/Practicas seguras/codigo.php">
                         Prácticas seguras
                         </a>
                     </li>
@@ -145,13 +145,13 @@ $db_conn->close_connection();
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-outline-light nav-btn mx-2 my-1"
-                        href="accidentes.php">
+                        href="/TungTung/Pages/accidentes motocicleta/crud_accidentesmoto/accidentes.php">
                         Accidentes
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-light nav-btn mx-2 my-1"
-                        href="../preguntas_frec.php">
+                        href="#">
                         FAQ
                         </a>
                     </li>
