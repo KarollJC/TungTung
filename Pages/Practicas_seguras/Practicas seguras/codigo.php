@@ -1,3 +1,18 @@
+<?php
+session_start();
+$login_required = true;
+$is_admin = false;
+$username = "";
+if(isset($_SESSION["logged"]))
+{
+    $login_required = false;
+    $username = $_SESSION["username"] ?? "Usuario";
+    if(isset($_SESSION["is_admin"]) && $_SESSION["is_admin"])
+    {
+        $is_admin = true;
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,59 +21,94 @@
     <title></title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/estilo.css">
+    <link rel="stylesheet" href="/TungTung/Pages/css/stylesNav.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
-<body class="bg-dark text-white">
-  <header>
+<body class="text-white">
   <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top">
-      <div class="container">
-          <a class="navbar-brand" href="inicio.php">
-              Seguridad Vial
-          </a>
-          <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false">
-              <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="btn btn-outline-light nav-btn mx-2 my-1"
-                    href="Practicas_seguras/Practicas seguras/codigo.html">
-                    Prácticas seguras
+        <div class="container">
+            <a class="navbar-brand" href="/TungTung/Pages/inicio.php">
+                <img src="/TungTung/Pages/img/rino.png" height="50px" alt="">
+                Seguridad Vial
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="btn btn-light nav-btn mx-2 my-1"
+                        href="#">
+                        Prácticas seguras
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light nav-btn mx-2 my-1"
+                        href="/TungTung/Pages/Tipos_cascos.php">
+                        Tipos de Cascos
+                        </a>
+                    </li>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light nav-btn mx-2 my-1"
+                        href="/TungTung/Pages/reglamento.php">
+                        Reglamento
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light nav-btn mx-2 my-1"
+                        href="/TungTung/Pages/accidentes motocicleta/crud_accidentesmoto/accidentes.php">
+                        Accidentes
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-light nav-btn mx-2 my-1"
+                        href="/TungTung/Pages/preguntas_frec.php">
+                        FAQ
+                        </a>
+                    </li>
+                    <?php
+                    if($login_required)
+                    {
+                        echo "
+                    <li class='nav-item'>
+                            <a class='btn btn-outline-light nav-btn mx-2 my-1'
+                            href='/TungTung/Pages/login.php'> Iniciar Sesión</a>
+                    </li>";
+                    }
+                    else
+                    {
+                        echo "
+                    <li class='nav-item dropdown'>
+                    <a class='dropdown-toggle btn btn-outline-light nav-btn mx-2 my-1' id='navbarDropdown' role='button' data-bs-toggle='dropdown' aria-expanded='false'>";
+                    if($is_admin)
+                    {
+                        echo 
+                        "<i class='fas fa-server' style='color: var(--secondary-color);'></i>";
+                    }
+                    else
+                    {
+                        echo
+                        "<i class='fas fa-user' style='color: var(--secondary-color);'></i>";
+                    }
+                    echo "
+                        $username
                     </a>
-                </li>
-                <li class="nav-item">
-                  <a class="btn btn-outline-light nav-btn mx-2 my-1"
-                  href="Tipos_cascos.php">
-                  Tipos de Cascos
-                  </a>
-              </li>
-              </li>
-              <li class="nav-item">
-                  <a class="btn btn-outline-light nav-btn mx-2 my-1"
-                  href="reglamento.php">
-                  Reglamento
-                  </a>
-              </li>
-              <li class="nav-item">
-                  <a class="btn btn-outline-light nav-btn mx-2 my-1"
-                  href="accidentes motocicleta/crud_accidentesmoto/accidentes.php">
-                  Accidentes
-                  </a>
-              </li>
-              <li class="nav-item">
-                  <a class="btn btn-outline-light nav-btn mx-2 my-1"
-                  href="preguntas_frecuentes/crud_preguntas/preguntas_frec.php">
-                  FAQ
-                  </a>
-              </li>
-
-          </button>
-          </div>
+                    <ul class='dropdown-menu' aria-labelledby='navbarDropdown'>
+                        <li>
+                            <a class='dropdown-item' href='logout.php'>Cerrar Sesión</a>
+                        </li>
+                    </ul>
+                    </li>";
+                    }
+                    ?>
+                </ul>
+            </div>
         </div>
-        </div>
-      </nav>
+    </nav>
       <br> 
-    </header>
-      <p class="h3">Practicas seguras recomendadas</p>
+      <p class="h3">Practicas seguras recomendadas</p><br>
         <ol class="letras">
           <li><p>Revisar la presión de los neumáticos</p></li>
           <li><p>Evitar dejar el motor en ralentí al estacionarse (motor encendido sin movimiento del vehículo).</p></li>
@@ -84,7 +134,7 @@
           <li><p>Si vas a salir de comisión y tu ruta es larga, recuerda dormir bien una noche antes, al menos ocho horas, para evitar problemas de fatiga.</p></li>
           <li><p>No conduzcas cansado, si te acompaña alguien que pueda conducir haz un relevo en la conducción, pero si conduces solo y aún te falta tramo por recorrer, busca un lugar seguro para descansar y trata de dormir 30 minutos, este descanso te permitirá conducir otras tres horas. </p></li>
     </ol>
-
+    <br>
 
     <p class="h3">Panorama de la situación de tránsito</p>
     <p>Durante la conducción es de gran importancia mantener un adecuado campo visual ya que permite la observación circundante mediante:</p>
@@ -93,7 +143,7 @@
     <li>La modificación constante del campo visual, mirando detrás del vehículo, por los espejos retrovisores interiores y exteriores.</li>
     <li>Una mirada atenta, alternativamente a mayor o menor lejanía, que permite contemplar de forma más amplia la circulación de la vía. Se debe mantener una posición adecuada, tanto de los espejos retrovisores como de los asientos del vehículo, y es recomendable no obstaculizar la visión con diversos elementos o vidrios que impidan la visual a los automóviles que circulan detrás.</li>
     </ol> 
-
+    <br>
 
     <p class="h3">Punto ciego</p>
     <p>Los puntos ciegos son las áreas de visión no cubiertas por los tres espejos retrovisores: central, en el interior
@@ -105,7 +155,7 @@
        o semiautopista. También se debe ajustar el espejo exterior de modo que se pueda ver el extremo de la manija
        de la puerta delantera en el extremo inferior derecho del espejo. Esto permitirá advertir una parte de los carriles
        de tránsito a la izquierda y detrás del automóvil.</p>
-
+    <br>
 
     <p class="h3">Maniobra de giro</p>
     <p>En la circulación, cuando es necesario realizar un giro, se debe tener presente que la preferencia de paso la
@@ -114,6 +164,7 @@
        del giro de manera imprevista.</p>
     <p>Es necesario circular desde 30 metros antes por el costado más próximo al giro a efectuar y cerciorarse, por
        los espejos retrovisores, que los vehículos que circulan detrás han percibido y entendido la señal de giro.</p>
+       <br>
     <p class="h3">Distancia de frenado</p>
     <p>El trayecto que recorre un vehículo desde el momento en que el conductor advierte un peligro hasta que el
        vehículo se detiene totalmente. Ejemplo: un automóvil que circula a 100 km/h requiere una distancia de 150 m
@@ -122,6 +173,7 @@
     <p>Cuando el descenso es muy prologado, no debe utilizar todo el tiempo el freno, ya que al recalentarse pierde
        eficacia. El descenso debe hacerse con el mismo cambio de caja que necesita para subir, de manera que sea
        el motor el que regula la velocidad y no el freno.</p>
+       <br>
     <p class="h3">Conducción nocturna</p>
     <ol>
       <li>Antes de iniciar un viaje revise el sistema eléctrico y que las luces frontales estén alineadas.</li>
@@ -131,6 +183,7 @@
       <li>Circule siempre con las luces bajas encendidas.</li>
       <li>Antes de entrar a un túnel encienda las luces.</li>
     </ol>
+    <br>
     <p class="h3">Qué hacer en caso de siniestro</p>
     <ol>
       <li>Detenerse en un lugar seguro. Intente siempre no aumentar el riesgo ni obstaculizar el ingreso a la zona de
@@ -141,6 +194,7 @@
       <li>Con respecto a los heridos, no los mueva si no hay riesgo inminente de incendio u otro factor que ponga en
           riesgo la vida del herido.</li>
     </ol>
+    <br>
     <p class="h3">Qué revisar antes de usar el vehículo</p>
     <ol>
       <li>Revisar niveles de: combustible, aceite, líquido de frenos, anticongelante, líquido de dirección y agua para
@@ -153,14 +207,25 @@
           comisión y salida de equipo.</li>
       <li>Revise la condición del clima de las próximas horas del lugar de su destino.</li>
     </ol>
+    <br>
 
     <p class="h5">REFERENCIAS:</p>
     <button type="button" class="btn btn-link">https://www.imt.mx/images/files/CIEG/Guia_Buenas_Practicas_Conduccion.pdf</button>
 
-    <footer class="bg-dark text-white p-3 text-center mt-4">
-      CBTis 217
-    </footer>
+    <footer class="bg-dark text-center text-white">
+        <div class="container p-2 pb-0">
+            <section class="mb-2">
+            <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/KarollJC/TungTung" role="button"
+                ><i class="fab fa-github"></i
+            ></a>
+            </section>
+            <a style="color: white;" href="/TungTung/Pages/Contacto.php"><u>Contacto</u></a>
+        </div>
 
+        <div class="text-center p-2" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2025 TungTungcitos
+        </div>
+    </footer>
 
     <script src="js/bootstrap.bundle.min.js"></script>
   </body>

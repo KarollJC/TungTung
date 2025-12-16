@@ -98,7 +98,7 @@ function get_image_path($index)
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <a class="btn btn-outline-light nav-btn mx-2 my-1"
-                        href="codigo.php">
+                        href="Practicas_seguras/Practicas seguras/codigo.php">
                         Prácticas seguras
                         </a>
                     </li>
@@ -117,7 +117,7 @@ function get_image_path($index)
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-outline-light nav-btn mx-2 my-1"
-                        href="accidentes.php">
+                        href="accidentes motocicleta/crud_accidentesmoto/accidentes.php">
                         Accidentes
                         </a>
                     </li>
@@ -349,6 +349,21 @@ function get_image_path($index)
     </div>
 </div>
 
+<footer class="bg-dark text-center text-white">
+        <div class="container p-2 pb-0">
+            <section class="mb-2">
+            <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/KarollJC/TungTung" role="button"
+                ><i class="fab fa-github"></i
+            ></a>
+            </section>
+            <a style="color: white;" href="Contacto.php"><u>Contacto</u></a>
+        </div>
+
+        <div class="text-center p-2" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2025 TungTungcitos
+        </div>
+    </footer>
+
 <script>
 document.addEventListener('DOMContentLoaded', () => {
     const preview = document.getElementById('previewImg');
@@ -361,6 +376,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
 </script>
 <script src="js/bootstrap.bundle.min.js"></script>
 </body>
