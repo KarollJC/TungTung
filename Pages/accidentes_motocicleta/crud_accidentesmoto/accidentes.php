@@ -28,9 +28,10 @@ while($row = $accidentes->fetch_assoc()){
 <title>Accidentes en Motocicleta</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/TungTung/Pages/css/stylesNav.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../../css/generalStyle.css">
+    <link rel="stylesheet" href="../../css/stylesNav.css">
     <style>
 
     body{
@@ -73,8 +74,8 @@ while($row = $accidentes->fetch_assoc()){
 
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top">
         <div class="container">
-            <a class="navbar-brand" href="/TungTung/Pages/inicio.php">
-                <img src="/TungTung/Pages/img/rino.png" height="50px" alt="">
+            <a class="navbar-brand" href="../../inicio.php">
+                <img src="../../img/rino.png" height="50px" alt="cbtislogo">
                 Seguridad Vial
             </a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false">
@@ -85,20 +86,20 @@ while($row = $accidentes->fetch_assoc()){
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <a class="btn btn-outline-light nav-btn mx-2 my-1"
-                        href="/TungTung/Pages/Practicas_seguras/Practicas seguras/codigo.php">
+                        href="../../Practicas_seguras/codigo.php">
                         Prácticas seguras
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-outline-light nav-btn mx-2 my-1"
-                        href="/TungTung/Pages/Tipos_cascos.php">
+                        href="../../Tipos_cascos.php">
                         Tipos de Cascos
                         </a>
                     </li>
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-outline-light nav-btn mx-2 my-1"
-                        href="/TungTung/Pages/reglamento.php">
+                        href="../../reglamento.php">
                         Reglamento
                         </a>
                     </li>
@@ -110,7 +111,7 @@ while($row = $accidentes->fetch_assoc()){
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-outline-light nav-btn mx-2 my-1"
-                        href="/TungTung/Pages/preguntas_frec.php">
+                        href="../../preguntas_frec.php">
                         FAQ
                         </a>
                     </li>
@@ -120,7 +121,7 @@ while($row = $accidentes->fetch_assoc()){
                         echo "
                     <li class='nav-item'>
                             <a class='btn btn-outline-light nav-btn mx-2 my-1'
-                            href='/TungTung/Pages/login.php'> Iniciar Sesión</a>
+                            href='../../login.php'> Iniciar Sesión</a>
                     </li>";
                     }
                     else
@@ -143,7 +144,7 @@ while($row = $accidentes->fetch_assoc()){
                     </a>
                     <ul class='dropdown-menu' aria-labelledby='navbarDropdown'>
                         <li>
-                            <a class='dropdown-item' href='logout.php'>Cerrar Sesión</a>
+                            <a class='dropdown-item' href='../../logout.php'>Cerrar Sesión</a>
                         </li>
                     </ul>
                     </li>";
@@ -198,9 +199,11 @@ while($row = $accidentes->fetch_assoc()){
             <p><strong>Uso de casco:</strong> ${a.uso_casco}</p>
             <p><strong>Nivel de gravedad:</strong> ${a.nivel_gravedad}</p>
 
+            <?php if($is_admin): ?>
             <a href="update.php?id=${a.id_accidentes}" class="btn btn-editar mt-3">
                 Editar Accidente
             </a>
+            <?php endif; ?>
         `;
     }
 
@@ -219,13 +222,11 @@ while($row = $accidentes->fetch_assoc()){
                 ><i class="fab fa-github"></i
             ></a>
             </section>
-            <a style="color: white;" href="/TungTung/Pages/Contacto.php"><u>Contacto</u></a>
+            <a style="color: white;" href="../../Contacto.php"><u>Contacto</u></a>
         </div>
 
-        <div class="text-center p-2" style="background-color: rgba(0, 0, 0, 0.2);">
-            © 2025 TungTungcitos
+        <div class="text-center p-2" style="background-color: var(--footer-bg);">© 2025 TungTungcitos
         </div>
     </footer>
-
 </body>
 </html>

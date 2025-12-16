@@ -1,34 +1,30 @@
 <?php
-    $db_host = 'localhost';
-    $db_user = 'root';
-    $db_pass = '';
-    $db_database = 'tungtung';
-    $db_port = '3306';
+require_once '../Libs/tungtungcrud.php';
+$dbHost = getenv('DB_HOST') ?: 'localhost';
+session_start();
 
-    $conexion = mysqli_connect($db_host, $db_user, $db_pass, $db_database, $db_port);
+$db_conn = new Database($dbHost, 'tungtung', 'tungtungcitos', '1234');
+$conexion = $db_conn->connect_db();
 
-    $email = $_POST['email'];
-    $user = $_POST['user'];
-    $nombre = $_POST['nombre'];
-    $apellidos = $_POST['apellidos'];
-    $fecha = $_POST['fecha'];
-    $contra = $_POST['contra'];
-    $telefono = $_POST['telefono'];
-    
-    $consulta = "INSERT INTO usuarios (email, usuario, nombre, apellidos, f_nacimiento, contra, num_telefono)
-    VALUES ('$email', '$user', '$nombre', '$apellidos', '$fecha', '$contra', '$telefono')";
+$register_data = [
+    'email' => isset($_POST['email']) ? $_POST['email'] : '',
+    'usuario' => isset($_POST['user']) ? $_POST['user'] : '',
+    'apellidos' => isset($_POST['apellidos']) ? $_POST['apellidos'] : '',
+    'nombre' => isset($_POST['nombre']) ? $_POST['nombre'] : '',
+    'f_nacimiento' => isset($_POST['fecha']) ? $_POST['fecha'] : '',
+    'contra' => isset($_POST['contra']) ? $_POST['contra'] : '',
+    'num_telefono' => isset($_POST['telefono']) ? $_POST['telefono'] : ''
+];
 
+$sql = new CRUD($conexion, 'usuarios');
+$query = $sql->create($register_data);
+$ok = 2;
 
-    $resultado = mysqli_query($conexion, $consulta);
+if($query != false)
+{
+    $ok = 1;
+}
 
-    if($resultado) {
-        header("Location: Registro.php?ok=1");
-        exit;
-    } else {
-        header("Location: Registro.php?error=1");
-        exit;
-    }
-
-
-    mysqli_close($conexion);
+$db_conn->close_connection();
+header("Location: Registro.php?ok=".$ok);
 ?>

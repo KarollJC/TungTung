@@ -1,6 +1,8 @@
 <?php
 include('../Libs/tungtungcrud.php');
 session_start();
+$dbHost = getenv('DB_HOST') ?: 'localhost';
+
 if(isset($_SESSION["logged"]))
 {
     header("Location: inicio.php");
@@ -14,8 +16,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     $username = isset($_POST["usuario"]) ? trim($_POST["usuario"]) : '';
     $password = isset($_POST["contra"]) ? $_POST["contra"] : '';
 
-    $db_conn = new Database("localhost","tungtung","tungtungcitos","1234"); //<-Los demas
-    //$db_conn = new Database("db","tungtung","tungtungcitos","1234"); //<- David
+    $db_conn = new Database($dbHost, 'tungtung', 'tungtungcitos', '1234');
     $conn = $db_conn->connect_db();
     $sql = new CRUD($conn, 'usuarios');
     $query = $sql->read('usuario = ?', [$username], null, 1);
@@ -40,7 +41,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
         {
             $sql = new CRUD($conn, 'admins');
             $query2 = $sql->read('user_id = ?', [$id], null, 1);
-
+            
             if(!empty($query2))
             {
                 $admin = true;
@@ -69,14 +70,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     <title>Login - Seguridad Vial</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="css/general_style.css">
+    <link rel="stylesheet" href="css/generalStyle.css">
     <link rel="stylesheet" href="css/stylesNav.css">
 </head>
 <body class="text-white body">
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top">
         <div class="container">
             <a class="navbar-brand" href="inicio.php">
-                <img src="img/rino.png" height="50px" alt="">
+                <img src="img/rino.png" height="50px" alt="cbtislogo">
                 Seguridad Vial
             </a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false">
@@ -87,7 +88,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <a class="btn btn-outline-light nav-btn mx-2 my-1"
-                        href="/TungTung/Pages/Practicas_Seguras/Practicas seguras/codigo.php">
+                        href="Practicas_seguras/codigo.php">
                         Prácticas seguras
                         </a>
                     </li>
@@ -106,7 +107,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-outline-light nav-btn mx-2 my-1"
-                        href="accidentes motocicleta/crud_accidentesmoto/accidentes.php">
+                        href="accidentes_motocicleta/crud_accidentesmoto/accidentes.php">
                         Accidentes
                         </a>
                     </li>
@@ -163,8 +164,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
             <a style="color: white;" href="Contacto.php"><u>Contacto</u></a>
         </div>
 
-        <div class="text-center p-2" style="background-color: rgba(0, 0, 0, 0.2);">
-            © 2025 TungTungcitos
+        <div class="text-center p-2" style="background-color: var(--footer-bg);">© 2025 TungTungcitos
         </div>
     </footer>
     <script src="js/bootstrap.bundle.min.js"></script>

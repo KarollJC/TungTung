@@ -1,12 +1,8 @@
 <?php
 require_once __DIR__ . '/../Libs/tungtungcrud.php';
+$dbHost = getenv('DB_HOST') ?: 'localhost';
 
-$db_host = 'localhost';
-$db_user = 'root';
-$db_pass = '';
-$db_database = 'tungtung';
-
-$db = new Database($db_host, $db_database, $db_user, $db_pass);
+$db = new Database($dbHost, 'tungtung', 'tungtungcitos', '1234');
 $conexion = $db->connect_db();
 
 $usuario = isset($_POST['usuario']) ? $_POST['usuario'] : '';
@@ -25,7 +21,7 @@ $data = [
 
 $insert_id = $mensajes->create($data);
 
-if ($insert_id !== false) {
+if ($insert_id !== false){
     $estado = "ok";
 } else {
     $estado = "error";

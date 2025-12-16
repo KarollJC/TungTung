@@ -1,7 +1,8 @@
 <?php
 session_start();
-$mensaje_ok = isset($_GET['ok']);
-$mensaje_error = isset($_GET['error']);
+$mensaje_ok = null;
+if(isset($_GET['ok'])) $mensaje_ok = isset($_GET['ok']);
+
 if(isset($_SESSION["logged"]))
 {
     header("Location: inicio.php");
@@ -16,7 +17,7 @@ if(isset($_SESSION["logged"]))
     <title>Registro</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="css/general_style.css">
+    <link rel="stylesheet" href="css/generalStyle.css">
     <link rel="stylesheet" href="css/stylesNav.css">
     <link rel="stylesheet" href="css/stylesRegistro.css">
 </head>
@@ -24,7 +25,7 @@ if(isset($_SESSION["logged"]))
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top">
         <div class="container">
             <a class="navbar-brand" href="inicio.php">
-                <img src="img/rino.png" height="50px" alt="">
+                <img src="img/rino.png" height="50px" alt="cbtislogo">
                 Seguridad Vial
             </a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false">
@@ -35,7 +36,7 @@ if(isset($_SESSION["logged"]))
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <a class="btn btn-outline-light nav-btn mx-2 my-1"
-                        href="/TungTung/Pages/Practicas_Seguras/Practicas seguras/codigo.php">
+                        href="Practicas_seguras/codigo.php">
                         Prácticas seguras
                         </a>
                     </li>
@@ -54,7 +55,7 @@ if(isset($_SESSION["logged"]))
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-outline-light nav-btn mx-2 my-1"
-                        href="accidentes motocicleta/crud_accidentesmoto/accidentes.php">
+                        href="accidentes_motocicleta/crud_accidentesmoto/accidentes.php">
                         Accidentes
                         </a>
                     </li>
@@ -78,13 +79,12 @@ if(isset($_SESSION["logged"]))
 
             <h2 class="text-danger mb-4">Crea tu cuenta</h2><br>
 
-            <?php if($mensaje_ok): ?>
+            <?php
+            if($mensaje_ok == 1): ?>
                 <div class="alert alert-success text-center">
                     Cuenta creada correctamente
                 </div>
-            <?php endif; ?>
-
-            <?php if($mensaje_error): ?>
+            <?php elseif($mensaje_ok == 2): ?>
                 <div class="alert alert-danger text-center">
                     Error al crear la cuenta
                 </div>
@@ -148,8 +148,7 @@ if(isset($_SESSION["logged"]))
             <a style="color: white;" href="Contacto.php"><u>Contacto</u></a>
         </div>
 
-        <div class="text-center p-2" style="background-color: rgba(0, 0, 0, 0.2);">
-            © 2025 TungTungcitos
+        <div class="text-center p-2" style="background-color: var(--footer-bg);">© 2025 TungTungcitos
         </div>
     </footer>
     <script src="js/bootstrap.bundle.min.js"></script>
