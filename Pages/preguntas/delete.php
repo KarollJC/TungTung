@@ -1,10 +1,10 @@
 <?php
+$dbHost = getenv('DB_HOST') ?: 'localhost';
 session_start();
 include("../../Libs/tungtungcrud.php");
 $id = $_GET['id'];
 
-$db_conn = new Database("localhost","tungtung","tungtungcitos","1234"); //<-Los demas
-//$db_conn = new Database("db","tungtung","tungtungcitos","1234"); //<- David
+$db_conn = new Database($dbHost, 'tungtung', 'tungtungcitos', '1234');
 $conn = $db_conn->connect_db();
 $sql = new CRUD($conn, 'preguntas_frecuentes');
 

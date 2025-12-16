@@ -18,17 +18,18 @@ if(isset($_SESSION["logged"]))
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/estilo.css">
-    <link rel="stylesheet" href="/TungTung/Pages/css/stylesNav.css">
+    <title>Practicas Seguras</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/estilo.css">
+    <link rel="stylesheet" href="../css/stylesNav.css">
+    <link rel="stylesheet" href="../css/generalStyle.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body class="text-white">
   <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top">
         <div class="container">
-            <a class="navbar-brand" href="/TungTung/Pages/inicio.php">
-                <img src="/TungTung/Pages/img/rino.png" height="50px" alt="">
+            <a class="navbar-brand" href="../inicio.php">
+                <img src="../img/rino.png" height="50px" alt="cbtislogo">
                 Seguridad Vial
             </a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false">
@@ -45,26 +46,26 @@ if(isset($_SESSION["logged"]))
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-outline-light nav-btn mx-2 my-1"
-                        href="/TungTung/Pages/Tipos_cascos.php">
+                        href="../Tipos_cascos.php">
                         Tipos de Cascos
                         </a>
                     </li>
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-outline-light nav-btn mx-2 my-1"
-                        href="/TungTung/Pages/reglamento.php">
+                        href="../reglamento.php">
                         Reglamento
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-outline-light nav-btn mx-2 my-1"
-                        href="/TungTung/Pages/accidentes motocicleta/crud_accidentesmoto/accidentes.php">
+                        href="../accidentes_motocicleta/crud_accidentesmoto/accidentes.php">
                         Accidentes
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-outline-light nav-btn mx-2 my-1"
-                        href="/TungTung/Pages/preguntas_frec.php">
+                        href="../preguntas_frec.php">
                         FAQ
                         </a>
                     </li>
@@ -74,7 +75,7 @@ if(isset($_SESSION["logged"]))
                         echo "
                     <li class='nav-item'>
                             <a class='btn btn-outline-light nav-btn mx-2 my-1'
-                            href='/TungTung/Pages/login.php'> Iniciar Sesión</a>
+                            href='../login.php'> Iniciar Sesión</a>
                     </li>";
                     }
                     else
@@ -97,7 +98,7 @@ if(isset($_SESSION["logged"]))
                     </a>
                     <ul class='dropdown-menu' aria-labelledby='navbarDropdown'>
                         <li>
-                            <a class='dropdown-item' href='logout.php'>Cerrar Sesión</a>
+                            <a class='dropdown-item' href='../logout.php'>Cerrar Sesión</a>
                         </li>
                     </ul>
                     </li>";
@@ -107,32 +108,32 @@ if(isset($_SESSION["logged"]))
             </div>
         </div>
     </nav>
-      <br> 
-      <p class="h3">Practicas seguras recomendadas</p><br>
-        <ol class="letras">
-          <li><p>Revisar la presión de los neumáticos</p></li>
-          <li><p>Evitar dejar el motor en ralentí al estacionarse (motor encendido sin movimiento del vehículo).</p></li>
-          <li><p>Apagar el motor del vehículo cuando esté parado.</p></li>
-          <li><p>Para mejorar el rendimiento del auto, la velocidad recomendable es de 80 km/h. Cuando circules por zonas urbanas: 50 km/h y en zonas escolares: 30 km/h.</p></li>
-          <li><p>Mantener una velocidad uniforme o estable siempre que sea posible.</p></li>
-          <li><p>Conducir con suavidad y anticiparse a posibles paradas, evitando las aceleraciones repentinas y el frenado brusco (conducción con suficiente anticipación y previsión).</p></li>
-          <li><p>Conducir a bajas revoluciones: en vehículos a gasolina es recomendable pasar a la marcha superior entre 2.000 y 2.500 rpm; en la 4.ª, 5.ª y 6.ª marcha el motor consume menos combustible. En vehículos diésel es recomendable pasar a la marcha superior desde 1.500 rpm.</p></li>
-          <li><p>Planificar la ruta más eficiente de viaje, evitando vueltas innecesarias o rutas ineficientes.</p></li>
-          <li><p>Uso correcto del aire acondicionado: ajustar la temperatura requerida, ya que a menor temperatura mayor consumo de energía y combustible.</p></li>
-          <li><p>Apagar el aire acondicionado antes de apagar el vehículo.</p></li>
-          <li><p>Cierre de ventanillas a velocidades de carretera o autopista para generar menor resistencia al aire.</p></li>
-          <li><p>Evitar exceso de equipaje (menos carga, más eficiencia de combustible).</p></li>
-          <li><p>Conocer el reglamento de tránsito.</p></li>
-          <li><p>Respetar la normativa vial y actuar con responsabilidad en el tránsito.</p></li>
-          <li><p>No conducir cansado ni bajo efectos de sustancias tóxicas o alcohol.</p></li>
-          <li><p>No usar el teléfono celular mientras se conduce.</p></li>
-          <li><p>Utilizar siempre el cinturón de seguridad del conductor y de los acompañantes.</p></li>
-          <li><p>Respetar una adecuada distancia de seguridad entre los automóviles (al menos un auto de distancia).</p></li>
-          <li><p>Evitar los carriles rápidos en las vías y circular en el carril de la mano derecha a la velocidad autorizada. Al circular por la derecha es importante analizar la situación del tránsito y tener en cuenta las características de la estructura del camino. Observar si está dividido en varios carriles de distintas direcciones y/o si dispone de carriles para bicicletas y peatones.</p></li>
-          <li><p>Prestar atención a la señalización existente de tránsito y a los límites de velocidad.</p></li>
-          <li><p>Maneja a la defensiva, dale preferencia a los usuarios vulnerables, respeta a los otros conductores y evita los conflictos.</p></li>
-          <li><p>Si vas a salir de comisión y tu ruta es larga, recuerda dormir bien una noche antes, al menos ocho horas, para evitar problemas de fatiga.</p></li>
-          <li><p>No conduzcas cansado, si te acompaña alguien que pueda conducir haz un relevo en la conducción, pero si conduces solo y aún te falta tramo por recorrer, busca un lugar seguro para descansar y trata de dormir 30 minutos, este descanso te permitirá conducir otras tres horas. </p></li>
+    <br> 
+    <p class="h3">Practicas seguras recomendadas</p><br>
+    <ol class="letras">
+        <li><p>Revisar la presión de los neumáticos</p></li>
+        <li><p>Evitar dejar el motor en ralentí al estacionarse (motor encendido sin movimiento del vehículo).</p></li>
+        <li><p>Apagar el motor del vehículo cuando esté parado.</p></li>
+        <li><p>Para mejorar el rendimiento del auto, la velocidad recomendable es de 80 km/h. Cuando circules por zonas urbanas: 50 km/h y en zonas escolares: 30 km/h.</p></li>
+        <li><p>Mantener una velocidad uniforme o estable siempre que sea posible.</p></li>
+        <li><p>Conducir con suavidad y anticiparse a posibles paradas, evitando las aceleraciones repentinas y el frenado brusco (conducción con suficiente anticipación y previsión).</p></li>
+        <li><p>Conducir a bajas revoluciones: en vehículos a gasolina es recomendable pasar a la marcha superior entre 2.000 y 2.500 rpm; en la 4.ª, 5.ª y 6.ª marcha el motor consume menos combustible. En vehículos diésel es recomendable pasar a la marcha superior desde 1.500 rpm.</p></li>
+        <li><p>Planificar la ruta más eficiente de viaje, evitando vueltas innecesarias o rutas ineficientes.</p></li>
+        <li><p>Uso correcto del aire acondicionado: ajustar la temperatura requerida, ya que a menor temperatura mayor consumo de energía y combustible.</p></li>
+        <li><p>Apagar el aire acondicionado antes de apagar el vehículo.</p></li>
+        <li><p>Cierre de ventanillas a velocidades de carretera o autopista para generar menor resistencia al aire.</p></li>
+        <li><p>Evitar exceso de equipaje (menos carga, más eficiencia de combustible).</p></li>
+        <li><p>Conocer el reglamento de tránsito.</p></li>
+        <li><p>Respetar la normativa vial y actuar con responsabilidad en el tránsito.</p></li>
+        <li><p>No conducir cansado ni bajo efectos de sustancias tóxicas o alcohol.</p></li>
+        <li><p>No usar el teléfono celular mientras se conduce.</p></li>
+        <li><p>Utilizar siempre el cinturón de seguridad del conductor y de los acompañantes.</p></li>
+        <li><p>Respetar una adecuada distancia de seguridad entre los automóviles (al menos un auto de distancia).</p></li>
+        <li><p>Evitar los carriles rápidos en las vías y circular en el carril de la mano derecha a la velocidad autorizada. Al circular por la derecha es importante analizar la situación del tránsito y tener en cuenta las características de la estructura del camino. Observar si está dividido en varios carriles de distintas direcciones y/o si dispone de carriles para bicicletas y peatones.</p></li>
+        <li><p>Prestar atención a la señalización existente de tránsito y a los límites de velocidad.</p></li>
+        <li><p>Maneja a la defensiva, dale preferencia a los usuarios vulnerables, respeta a los otros conductores y evita los conflictos.</p></li>
+        <li><p>Si vas a salir de comisión y tu ruta es larga, recuerda dormir bien una noche antes, al menos ocho horas, para evitar problemas de fatiga.</p></li>
+        <li><p>No conduzcas cansado, si te acompaña alguien que pueda conducir haz un relevo en la conducción, pero si conduces solo y aún te falta tramo por recorrer, busca un lugar seguro para descansar y trata de dormir 30 minutos, este descanso te permitirá conducir otras tres horas. </p></li>
     </ol>
     <br>
 
@@ -219,11 +220,10 @@ if(isset($_SESSION["logged"]))
                 ><i class="fab fa-github"></i
             ></a>
             </section>
-            <a style="color: white;" href="/TungTung/Pages/Contacto.php"><u>Contacto</u></a>
+            <a style="color: white;" href="../Contacto.php"><u>Contacto</u></a>
         </div>
 
-        <div class="text-center p-2" style="background-color: rgba(0, 0, 0, 0.2);">
-            © 2025 TungTungcitos
+        <div class="text-center p-2" style="background-color: var(--footer-bg);">© 2025 TungTungcitos
         </div>
     </footer>
 

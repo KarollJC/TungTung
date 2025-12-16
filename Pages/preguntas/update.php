@@ -1,6 +1,8 @@
 <?php
 include("../../Libs/tungtungcrud.php");
+$dbHost = getenv('DB_HOST') ?: 'localhost';
 session_start();
+
 $login_required = true;
 $is_admin = false;
 $username = "";
@@ -19,8 +21,7 @@ if(isset($_SESSION["logged"]))
     }
 }
 
-$db_conn = new Database("localhost","tungtung","tungtungcitos","1234"); //<-Los demas
-//$db_conn = new Database("db","tungtung","tungtungcitos","1234"); //<- David
+$db_conn = new Database($dbHost, 'tungtung', 'tungtungcitos', '1234');
 $conn = $db_conn->connect_db();
 $sql = new CRUD($conn, 'preguntas_frecuentes');
 $query = $sql->read('id_pregunta = ?', [$id], null, '1');
@@ -85,7 +86,7 @@ if (isset($_POST['actualizar'])) {
     <title>Editar Pregunta</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/general_style.css">
+    <link rel="stylesheet" href="../css/generalStyle.css">
     <link rel="stylesheet" href="../css/stylesNav.css">
     <style>
         h2{
@@ -267,8 +268,7 @@ if (isset($_POST['actualizar'])) {
             <a style="color: white;" href="Contacto.php"><u>Contacto</u></a>
         </div>
 
-        <div class="text-center p-2" style="background-color: rgba(0, 0, 0, 0.2);">
-            © 2025 TungTungcitos
+        <div class="text-center p-2" style="background-color: var(--footer-bg);">© 2025 TungTungcitos
         </div>
     </footer>
     <script src="js/bootstrap.bundle.min.js"></script>
