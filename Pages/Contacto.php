@@ -39,7 +39,7 @@ if(isset($_SESSION["logged"]))
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="btn btn-light nav-btn mx-2 my-1"
+                        <a class="btn btn-outline-light nav-btn mx-2 my-1"
                         href="#">
                         Prácticas seguras
                         </a>
