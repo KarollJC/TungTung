@@ -1,10 +1,21 @@
-.carousel-item img {
-    height: 380px;
-    object-fit: cover;
+#carouselCascos {
+    max-height: 420px;
+}
+
+#carouselCascos .carousel-item {
+    height: 420px;
+}
+
+#carouselCascos img {
+    width: auto !important;
+    max-width: none !important;
+    height: 100%;
+    object-fit: contain;
+    margin: 0 auto;
 }
 
 .carousel-caption {
-    background: rgba(0,0,0,0.55);
+    background: rgba(0 0 0 / 0.55);
     border-radius: 12px;
     padding: 1rem 1.5rem;
 }
@@ -15,4 +26,23 @@
 
 .carousel-caption p {
     font-size: 0.95rem;
+}
+
+.accord .accordion-body {
+    background-color: #7c041c;
+}
+
+.accord .accordion-item {
+    border-radius: 10px;
+}
+
+.accord .accordion-button{
+    background-color: #330000;
+    color: white;
+    font-size: clamp(14px, 2.5vw, 18px);
+}
+
+.accord .accordion-button:not(.collapsed){
+    background-color: #4d0000;
+    color:white;
 }

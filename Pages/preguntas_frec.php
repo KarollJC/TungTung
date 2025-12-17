@@ -23,7 +23,7 @@ if(isset($_SESSION["logged"]))
         $is_admin = true;
     }
 }
-$db_connw = new Database($dbHost, 'tungtung', 'tungtungcitos', '1234');
+$db_conn = new Database($dbHost, 'tungtung', 'tungtungcitos', '1234');
 
 $conn = $db_conn->connect_db();
 $sql = new CRUD($conn, 'preguntas_frecuentes');
@@ -50,16 +50,26 @@ $db_conn->close_connection();
 
         .faq-card{
             background-color:#330000;
-            color:white;
+            color: white;
             border:none;
         }
+
+        .accordion-body {
+            background-color: #7c041c;
+        }
+
+        .accordion-item {
+            border-radius: 10px;
+        }
+
         .accordion-button{
-            background-color:#330000;
-            color:white;
+            background-color: #330000;
+            color: white;
             font-size: clamp(14px, 2.5vw, 18px);
         }
+
         .accordion-button:not(.collapsed){
-            background-color:#4d0000;
+            background-color: #4d0000;
             color:white;
         }
 
@@ -124,7 +134,7 @@ $db_conn->close_connection();
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false">
                 <span class="navbar-toggler-icon"></span>
             </button>
-          
+        
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
@@ -148,51 +158,38 @@ $db_conn->close_connection();
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-outline-light nav-btn mx-2 my-1"
-                        href="/TungTung/Pages/accidentes motocicleta/crud_accidentesmoto/accidentes.php">
+                        href="accidentes_motocicleta/crud_accidentesmoto/accidentes.php">
                         Accidentes
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-light nav-btn mx-2 my-1"
+                        <a class="btn btn-outline-light nav-btn mx-2 my-1"
                         href="#">
                         FAQ
                         </a>
                     </li>
-                    <?php
-                    if($login_required)
-                    {
-                        echo "
+                    <?php if($login_required): ?>
                     <li class='nav-item'>
                         <a class='btn btn-outline-light nav-btn mx-2 my-1'
                         href='login.php'> Iniciar Sesión</a>
-                    </li>";
-                    }
-                    else
-                    {
-                        echo "
+                    </li>
+                    <?php else: ?>
                     <li class='nav-item dropdown'>
-                    <a class='dropdown-toggle btn btn-outline-light nav-btn mx-2 my-1' id='navbarDropdown' role='button' data-bs-toggle='dropdown' aria-expanded='false'>";
-                    if($is_admin)
-                    {
-                        echo 
-                        "<i class='fas fa-server' style='color: var(--secondary-color);'></i>";
-                    }
-                    else
-                    {
-                        echo
-                        "<i class='fas fa-user' style='color: var(--secondary-color);'></i>";
-                    }
-                    echo "
-                        $username
+                        <a class='dropdown-toggle btn btn-outline-light nav-btn mx-2 my-1' id='navbarDropdown' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
+                        <?php if($is_admin): ?>
+                        <i class='fas fa-server' style='color: var(--secondary-color);'></i>
+                        <?php else: ?>
+                        <i class='fas fa-user' style='color: var(--secondary-color);'></i>
+                    <?php endif; ?>
+                        <?= $username ?>
                     </a>
                     <ul class='dropdown-menu' aria-labelledby='navbarDropdown'>
                         <li>
-                            <a class='dropdown-item' href='logout.php'>Cerrar Sesión</a>
+                            <a class='dropdown-item' style="color: var(--light-dark);" href='logout.php'>Cerrar Sesión</a>
                         </li>
                     </ul>
-                    </li>";
-                    }
-                    ?>
+                    </li>
+                    <?php endif; ?>
                 </ul>
             </div>
         </div>
@@ -209,42 +206,44 @@ $db_conn->close_connection();
                     <a href="preguntas/create.php" class="btn btn-add mt-2 mt-md-0">Agregar pregunta</a>
                 </div>
                 <div class="accordion" id="faqLista">
-                    <br>
-                    <?php
-                    if (is_array($query) && count($query) > 0)
-                    {
-                        foreach($query as $question)
-                        {
+                <br>
+                <?php if (is_array($query) && count($query) > 0): ?>
+                    <?php foreach($query as $question): ?>
+                        <?php 
                             $id = htmlspecialchars($question['id_pregunta']);
                             $pregunta = htmlspecialchars($question['pregunta']);
                             $usuario = htmlspecialchars($question['usuario']);
                             $respuesta = htmlspecialchars($question['respuesta']);
-                            echo '
-                            <div class="accordion-item faq-card mb-2">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#item'.$id.'">'
-                                    ."$usuario - $pregunta".'
-                                    </button>
-                                </h2>
+                            $can_edit = $usuario == $username ? true : false;
+                        ?>
 
-                                <div id="item'.$id.'" class="accordion-collapse collapse">
-                                    <div class="accordion-body">
-                                        '.$respuesta.'
+                        <div class="accordion-item faq-card mb-2">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#item<?= $id ?>">
+                                    <?= "$usuario - $pregunta" ?>
+                                </button>
+                            </h2>
 
-                                        <div class="mt-3 d-flex flex-wrap gap-2 faq-actions">
-                                            <a href="preguntas/update.php?id='.$id.'" class="btn btn-editar btn-sm">Editar / Responder</a>
-                                            <a href="preguntas/delete.php?id='.$id.'" class="btn btn-eliminar btn-sm">Eliminar</a>
-                                        </div>
+                            <div id="item<?= $id ?>" class="accordion-collapse collapse">
+                                <div class="accordion-body">
+                                    <?= $respuesta ?>
+
+                                    <div class="mt-3 d-flex flex-wrap gap-2 faq-actions">
+                                        <a href="preguntas/update.php?id=<?= $id ?>" class="btn btn-editar btn-sm">
+                                            <?php if($can_edit): ?>Editar / <?php endif; ?>
+                                            Responder
+                                        </a>
+                                        <?php if($can_edit): ?>
+                                        <a href="preguntas/delete.php?id=<?= $id ?>" class="btn btn-eliminar btn-sm">Eliminar</a>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
-                            </div>';
-                        }
-                    }
-                    else
-                    {
-                        echo "<h4 style='color: white;'>No hay preguntas todavía</h4>";
-                    }
-                    ?>
+                            </div>
+                        </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <h4 style='color: white;'>No hay preguntas todavía</h4>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

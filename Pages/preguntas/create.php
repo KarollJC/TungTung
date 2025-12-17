@@ -110,81 +110,69 @@ if (isset($_POST['subir'])) {
 <body class="text-white">
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top">
         <div class="container">
-            <a class="navbar-brand" href="inicio.php">
+            <a class="navbar-brand" href="../inicio.php">
+                <img src="../img/rino.png" height="50px" alt="cbtislogo">
                 Seguridad Vial
             </a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false">
                 <span class="navbar-toggler-icon"></span>
             </button>
-          
+        
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <a class="btn btn-outline-light nav-btn mx-2 my-1"
-                        href="codigo.php">
+                        href="../Practicas_seguras/codigo.php">
                         Prácticas seguras
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-outline-light nav-btn mx-2 my-1"
-                        href="Tipos_cascos.php">
+                        href="../Tipos_cascos.php">
                         Tipos de Cascos
                         </a>
                     </li>
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-outline-light nav-btn mx-2 my-1"
-                        href="reglamento.php">
+                        href="../reglamento.php">
                         Reglamento
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-outline-light nav-btn mx-2 my-1"
-                        href="accidentes.php">
+                        href="../accidentes_motocicleta/crud_accidentesmoto/accidentes.php">
                         Accidentes
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-outline-light nav-btn mx-2 my-1"
-                        href="preguntas_frec.php">
+                        href="../#">
                         FAQ
                         </a>
                     </li>
-                    <?php
-                    if($login_required)
-                    {
-                        echo "
+                    <?php if($login_required): ?>
                     <li class='nav-item'>
                         <a class='btn btn-outline-light nav-btn mx-2 my-1'
-                        href='login.php'> Iniciar Sesión</a>
-                    </li>";
-                    }
-                    else
-                    {
-                        echo "
+                        href='../login.php'> Iniciar Sesión</a>
+                    </li>
+                    <?php else: ?>
                     <li class='nav-item dropdown'>
-                    <a class='dropdown-toggle btn btn-outline-light nav-btn mx-2 my-1' id='navbarDropdown' role='button' data-bs-toggle='dropdown' aria-expanded='false'>";
-                    if($is_admin)
-                    {
-                        echo 
-                        "<i class='fas fa-server' style='color: var(--secondary-color);'></i>";
-                    }
-                    else
-                    {
-                        echo
-                        "<i class='fas fa-user' style='color: var(--secondary-color);'></i>";
-                    }
-                    echo "
-                        $username
+                        <a class='dropdown-toggle btn btn-outline-light nav-btn mx-2 my-1' id='navbarDropdown' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
+                        <?php if($is_admin): ?>
+                        <i class='fas fa-server' style='color: var(--secondary-color);'></i>
+                        <?php else: ?>
+                        <i class='fas fa-user' style='color: var(--secondary-color);'></i>
+                    <?php endif; ?>
+                        <?= $username ?>
                     </a>
                     <ul class='dropdown-menu' aria-labelledby='navbarDropdown'>
                         <li>
-                            <a class='dropdown-item' href='logout.php'>Cerrar Sesión</a>
+                            <a class='dropdown-item' style="color: var(--light-dark);" href='../logout.php'>Cerrar Sesión</a>
                         </li>
                     </ul>
-                    </li>";
-                    }
-                    ?>
+                    </li>
+                    <?php endif; ?>
                 </ul>
             </div>
         </div>
@@ -225,12 +213,12 @@ if (isset($_POST['subir'])) {
                 ><i class="fab fa-github"></i
             ></a>
             </section>
-            <a style="color: white;" href="Contacto.php"><u>Contacto</u></a>
+            <a style="color: white;" href="../Contacto.php"><u>Contacto</u></a>
         </div>
 
         <div class="text-center p-2" style="background-color: var(--footer-bg);">© 2025 TungTungcitos
         </div>
     </footer>
-    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

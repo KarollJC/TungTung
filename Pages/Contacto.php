@@ -35,12 +35,12 @@ if(isset($_SESSION["logged"]))
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false">
                 <span class="navbar-toggler-icon"></span>
             </button>
-          
+        
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <a class="btn btn-outline-light nav-btn mx-2 my-1"
-                        href="#">
+                        href="Practicas_seguras/codigo.php">
                         Prácticas seguras
                         </a>
                     </li>
@@ -69,41 +69,28 @@ if(isset($_SESSION["logged"]))
                         FAQ
                         </a>
                     </li>
-                    <?php
-                    if($login_required)
-                    {
-                        echo "
+                    <?php if($login_required): ?>
                     <li class='nav-item'>
-                            <a class='btn btn-outline-light nav-btn mx-2 my-1'
-                            href='login.php'> Iniciar Sesión</a>
-                    </li>";
-                    }
-                    else
-                    {
-                        echo "
+                        <a class='btn btn-outline-light nav-btn mx-2 my-1'
+                        href='login.php'> Iniciar Sesión</a>
+                    </li>
+                    <?php else: ?>
                     <li class='nav-item dropdown'>
-                    <a class='dropdown-toggle btn btn-outline-light nav-btn mx-2 my-1' id='navbarDropdown' role='button' data-bs-toggle='dropdown' aria-expanded='false'>";
-                    if($is_admin)
-                    {
-                        echo 
-                        "<i class='fas fa-server' style='color: var(--secondary-color);'></i>";
-                    }
-                    else
-                    {
-                        echo
-                        "<i class='fas fa-user' style='color: var(--secondary-color);'></i>";
-                    }
-                    echo "
-                        $username
+                        <a class='dropdown-toggle btn btn-outline-light nav-btn mx-2 my-1' id='navbarDropdown' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
+                        <?php if($is_admin): ?>
+                        <i class='fas fa-server' style='color: var(--secondary-color);'></i>
+                        <?php else: ?>
+                        <i class='fas fa-user' style='color: var(--secondary-color);'></i>
+                    <?php endif; ?>
+                        <?= $username ?>
                     </a>
                     <ul class='dropdown-menu' aria-labelledby='navbarDropdown'>
                         <li>
-                            <a class='dropdown-item' href='logout.php'>Cerrar Sesión</a>
+                            <a class='dropdown-item' style="color: var(--light-dark);" href='logout.php'>Cerrar Sesión</a>
                         </li>
                     </ul>
-                    </li>";
-                    }
-                    ?>
+                    </li>
+                    <?php endif; ?>
                 </ul>
             </div>
         </div>

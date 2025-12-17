@@ -1,12 +1,16 @@
 <?php
 session_start();
 $login_required = true;
+$is_admin = false;
 $username = "";
-
 if(isset($_SESSION["logged"]))
 {
     $login_required = false;
     $username = $_SESSION["username"] ?? "Usuario";
+    if(isset($_SESSION["is_admin"]) && $_SESSION["is_admin"])
+    {
+        $is_admin = true;
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -21,7 +25,7 @@ if(isset($_SESSION["logged"]))
     <link rel="stylesheet" href="css/stylesNav.css">
     <link rel="stylesheet" href="css/styleReglamento.css">
 </head>
-<body class="bg-dark text-white">
+<body>
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top">
         <div class="container">
             <a class="navbar-brand" href="inicio.php">
@@ -31,7 +35,7 @@ if(isset($_SESSION["logged"]))
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false">
                 <span class="navbar-toggler-icon"></span>
             </button>
-          
+        
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
@@ -48,7 +52,7 @@ if(isset($_SESSION["logged"]))
                     </li>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-light nav-btn mx-2 my-1"
+                        <a class="btn btn-outline-light nav-btn mx-2 my-1"
                         href="#">
                         Reglamento
                         </a>
@@ -65,43 +69,47 @@ if(isset($_SESSION["logged"]))
                         FAQ
                         </a>
                     </li>
-                    <?php
-                    if($login_required)
-                    {
-                        echo "
+                    <?php if($login_required): ?>
                     <li class='nav-item'>
                         <a class='btn btn-outline-light nav-btn mx-2 my-1'
                         href='login.php'> Iniciar Sesión</a>
-                    </li>";
-                    }
-                    else
-                    {
-                        echo "
+                    </li>
+                    <?php else: ?>
                     <li class='nav-item dropdown'>
-                        <a class='dropdown-toggle btn btn-outline-light nav-btn mx-2 my-1' id='navbarDropdown' role='button' data-bs-toggle='dropdown' aria-expanded='false'>$username</a>
-                        <ul class='dropdown-menu' aria-labelledby='navbarDropdown'>
+                        <a class='dropdown-toggle btn btn-outline-light nav-btn mx-2 my-1' id='navbarDropdown' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
+                        <?php if($is_admin): ?>
+                        <i class='fas fa-server' style='color: var(--secondary-color);'></i>
+                        <?php else: ?>
+                        <i class='fas fa-user' style='color: var(--secondary-color);'></i>
+                    <?php endif; ?>
+                        <?= $username ?>
+                    </a>
+                    <ul class='dropdown-menu' aria-labelledby='navbarDropdown'>
                         <li>
-                            <a class='dropdown-item' href='logout.php'>Cerrar Sesión</a>
+                            <a class='dropdown-item' style="color: var(--light-dark);" href='logout.php'>Cerrar Sesión</a>
                         </li>
-                        </ul>
-                    </li>";
-                    }
-                    ?>
+                    </ul>
+                    </li>
+                    <?php endif; ?>
                 </ul>
             </div>
         </div>
     </nav>
       <br>
 
-      <p class="h3 fw-bold">Normas y Reglamento Vial</p>
-      <p>El Decreto Número 201, expedido por la Quincuagésima Novena
-         Legislatura Constitucional del Estado, publicado en el Periódico Oficial del
-         Gobierno del Estado, de fecha 27 veintisiete de octubre de 2005 dos mil cinco,
-         mediante el cual se reforman, adicionan y derogan diversas disposiciones de la
-         Ley de Tránsito y Transporte del Estado de Guanajuato, establece en su Artículo
-         Tercero Transitorio la necesidad de adecuar los reglamentos respectivos, los
-         cuales deberán constituirse como el instrumento legal idóneo que permitirá la
-         exacta observancia de la citada Ley. </p>
+    <div class="row">
+        <div class="col-10 mx-auto px-3"">
+            <p class="h3 fw-bold">Normas y Reglamento Vial</p>
+            <p>El Decreto Número 201, expedido por la Quincuagésima Novena
+                Legislatura Constitucional del Estado, publicado en el Periódico Oficial del
+                Gobierno del Estado, de fecha 27 veintisiete de octubre de 2005 dos mil cinco,
+                mediante el cual se reforman, adicionan y derogan diversas disposiciones de la
+                Ley de Tránsito y Transporte del Estado de Guanajuato, establece en su Artículo
+                Tercero Transitorio la necesidad de adecuar los reglamentos respectivos, los
+                cuales deberán constituirse como el instrumento legal idóneo que permitirá la
+                exacta observancia de la citada Ley. </p>
+        </div>
+    </div>
 
 
     <div class="container py-5">
