@@ -73,8 +73,11 @@ create table mensaje(
     fecha datetime not null default current_timestamp
 );
 
+INSERT INTO usuarios (id_usuario, email, usuario, nombre, apellidos, f_nacimiento, contra, num_telefono)
+VALUES (1, "admin@admin.com", "admin", "root", "some", '2025-12-15', "1234", "0");
+
 INSERT INTO usuarios (email, usuario, nombre, apellidos, f_nacimiento, contra, num_telefono)
-VALUES ("admin@admin.com", "admin", "root", "some", '2025-12-15', '0');
+VALUES ("usuario@usuario.com", "usuario", "none", "some", '2025-12-16', "1234", "0");
 
 INSERT INTO admins (user_id) VALUES (1);
 

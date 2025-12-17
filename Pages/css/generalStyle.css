@@ -3,11 +3,13 @@
     --soft-text: #444444;
     --footer-bg: rgba(0, 0, 0, 0.2);
     --link-color: #28c2e1ff;
+    --light-dark: #212121;
+    --red-bright: #ff6e6f;
 }
 
 body {
-    background-color: rgb(33, 33, 33);
-    /**background: linear-gradient(135deg, #000000, #3a0505);*/
+    /*background-color: rgb(33, 33, 33);*/
+    background: linear-gradient(135deg, #000000, #3a0505);
     min-height: 100vh;
 }
 
@@ -27,8 +29,10 @@ h1 {
 
 #header {
     background-image: url("../img/banner.png");
+    background-position: center right;
+    background-repeat: no-repeat;
     padding: 20px;
-    height: 450px;
+    min-height: 450px;
     background-size: cover;
     position: relative;
     overflow: hidden;
@@ -111,4 +115,18 @@ h1 {
 }
 .dropdown-item{
     color: white;
+}
+
+#bannerCont {
+    position: relative;
+    z-index: 2;
+}
+
+@media (max-width: 768px) {
+    #header {
+        min-height: auto;
+        padding: 40px 20px;
+        align-items: flex-start;
+        background-position: center right;
+    }
 }
